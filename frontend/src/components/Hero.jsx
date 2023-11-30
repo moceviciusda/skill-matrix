@@ -1,6 +1,11 @@
 import { Container, Card, Button } from 'react-bootstrap';
+import { useGetUserQuery } from '../slices/usersApiSlice';
 
 const Hero = () => {
+  const { data, isLoading } = useGetUserQuery();
+
+  const userData = JSON.stringify(data);
+
   return (
     <div className=' py-5'>
       <Container className='d-flex justify-content-center'>
@@ -21,6 +26,8 @@ const Hero = () => {
           </div>
         </Card>
       </Container>
+      {isLoading && <span>LOADING</span>}
+      <span>{userData}</span>
     </div>
   );
 };

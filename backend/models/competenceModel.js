@@ -3,9 +3,7 @@ import { skillSchema } from "./skillModel.js";
 
 const levelSchema = mongoose.Schema({
     skills: {
-        type: [{
-            skillId:
-        }]
+        type: Array
     }
 })
 
