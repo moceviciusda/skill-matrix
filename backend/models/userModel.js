@@ -14,6 +14,18 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        required: true
+    },
+    group: {
+        type: String,
+        // required: true
+    },
+    team: {
+        type: String,
+        // required: true
     }
 }, {
     timestamps: true

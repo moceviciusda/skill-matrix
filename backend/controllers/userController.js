@@ -41,7 +41,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password
+        password,
+        role: 'user'
     })
 
     if (user) {
@@ -83,7 +84,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json(user)
 })
 
-// @desc    Get user profile
+// @desc    Update user profile
 // route    PUT /api/users/profile
 // @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
@@ -108,7 +109,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('User not found')
     }
-    res.status(200).json({ message: 'Update User Profile' })
 })
 
 export {
