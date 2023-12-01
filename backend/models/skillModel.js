@@ -13,7 +13,6 @@ const skillSchema = mongoose.Schema({
     timestamps: true
 })
 
-
 const Skill = mongoose.model('Skill', skillSchema)
 
 export { Skill, skillSchema }

@@ -1,34 +1,36 @@
-import mongoose from "mongoose";
-import { skillSchema } from "./skillModel.js";
+import mongoose from 'mongoose';
+import { skillSchema } from './skillModel.js';
 
 const levelSchema = mongoose.Schema({
-    skills: {
-        type: Array
-    }
-})
+  title: String,
+  skillIds: [String],
+});
 
-const competenceSchema = mongoose.Schema({
+const competenceSchema = mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     type: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     category: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     levels: {
-        type: [levelSchema],
-        default: []
-    }
-}, {
-    timestamps: true
-})
+      type: [levelSchema],
+      default: [],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Competence = mongoose.model('Competence', competenceSchema)
+const Competence = mongoose.model('Competence', competenceSchema);
 
-export default Competence
+export default Competence;
