@@ -1,8 +1,8 @@
-import { Accordion, Row, Col } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import Competence from './Competence';
 import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
 
-const Matrix = () => {
+const CompetenceCategory = () => {
   const { data, isLoading } = useGetCompetenceQuery();
 
   if (isLoading) return <></>;
@@ -19,4 +19,4 @@ const Matrix = () => {
   );
 };
 
-export default Matrix;
+export default CompetenceCategory;

@@ -14,18 +14,18 @@ const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
 
   const [updateCompetenceLevels] = useUpdateCompetenceLevelsMutation();
 
-  useEffect(() => {
-    document.body.addEventListener('click', (e) => {
-      console.log(e);
-      if (e.target.id !== competenceId + title) setShowForm(false);
-    });
+  // useEffect(() => {
+  //   document.body.addEventListener('click', (e) => {
+  //     console.log(e);
+  //     if (e.target.id !== competenceId + title) setShowForm(false);
+  //   });
 
-    return () =>
-      document.body.removeEventListener('click', (e) => {
-        console.log(e);
-        if (e.target.id !== competenceId + title) setShowForm(false);
-      });
-  }, []);
+  //   return () =>
+  //     document.body.removeEventListener('click', (e) => {
+  //       console.log(e);
+  //       if (e.target.id !== competenceId + title) setShowForm(false);
+  //     });
+  // }, []);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -34,11 +34,11 @@ const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
       const res = await createSkill({ summary, description }).unwrap();
       toast.success(`Skill created and added to ${title}`);
       setShowForm(false);
-      stateChanger([...skills, { skillId: res._id }]);
+      stateChanger([...skills, { weight: 1, skillId: res._id }]);
 
       await updateCompetenceLevels({
         id: competenceId,
-        [title]: [...skills, { skillId: res._id }],
+        [title]: [...skills, { weight: 1, skillId: res._id }],
       }).unwrap();
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -54,11 +54,7 @@ const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
           variant='primary'
           onClick={() => setShowForm(true)}
         >
-          <Container
-            key={competenceId + title}
-            id={competenceId + title}
-            className='flex justify-content-center'
-          >
+          <Container>
             <FaPlusSquare size={20} color='green' /> New Skill
           </Container>
         </ListGroup.Item>
@@ -79,7 +75,7 @@ const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
             />
           </ListGroup.Item>
           <ListGroup.Item action className='mb-2' variant='primary'>
-            <Container className='flex justify-content-center'>
+            <Container>
               <FaPlusSquare size={20} color='green' /> Submit
             </Container>
           </ListGroup.Item>

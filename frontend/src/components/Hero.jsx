@@ -1,16 +1,12 @@
-import { ButtonGroup, Container } from 'react-bootstrap';
+import { ButtonGroup, Col, Container, Row } from 'react-bootstrap';
 import { useGetSkillsQuery } from '../slices/skillsApiSlice';
-import SkillGroup from './matrix/SkillGroup';
-import Competence from './matrix/Competence';
+import SkillGroup from './matrixBuilder/SkillGroup';
+import Competence from './matrixBuilder/Competence';
 import { useGetCompetenceQuery } from '../slices/competenceApiSlice';
-import Matrix from './matrix/Matrix';
+import Matrix from './matrixBuilder/Matrix';
+import CompetenceCategory from './matrixBuilder/CompetenceCategory';
 
 const Hero = () => {
-  const { data, isLoading } = useGetCompetenceQuery('6568863a025e44b30b239cbc');
-
-  // const userData = JSON.stringify(data);
-  if (isLoading) return <></>;
-
   return (
     <Container fluid>
       <Matrix />

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { skillSchema } from './skillModel.js';
 
 const levelSchema = mongoose.Schema({
   beginner: [String],
