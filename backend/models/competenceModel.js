@@ -2,8 +2,10 @@ import mongoose from 'mongoose';
 import { skillSchema } from './skillModel.js';
 
 const levelSchema = mongoose.Schema({
-  title: String,
-  skillIds: [String],
+  beginner: [String],
+  advanced: [String],
+  proficient: [String],
+  expert: [String],
 });
 
 const competenceSchema = mongoose.Schema(
@@ -21,10 +23,7 @@ const competenceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    levels: {
-      type: [levelSchema],
-      default: [],
-    },
+    levels: levelSchema,
   },
   {
     timestamps: true,

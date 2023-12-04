@@ -1,32 +1,55 @@
 import { Container, Row, Col, Accordion } from 'react-bootstrap';
 import SkillGroup from './SkillGroup';
 import { useGetSkillsQuery } from '../../slices/skillsApiSlice';
+import { useState } from 'react';
 
 const Competence = ({ competenceData }) => {
-  const { data = [], isLoading } = useGetSkillsQuery({});
+  const [levels, setLevels] = useState(competenceData.levels);
 
-  console.log(competenceData);
+  // const { data = [], isLoading } = useGetSkillsQuery({
+  //   _id: '65697727338bab6405f1c028',
+  // });
 
-  if (isLoading) return <></>;
+  // console.log(data);
+  // console.log(competenceData);
+  // competenceData.levels.map((level) => {
+  //   console.log(level);
+  // });
+
+  // if (isLoading) return <></>;
 
   return (
-    <Accordion>
-      <Accordion.Item>
-        <Accordion.Header>Placeholder Competence</Accordion.Header>
-        <Accordion.Body>
-          <Row>
-            {competenceData?.levels?.map((level) => {
-              <Col>
-                <SkillGroup skillIds={level.skillIds} title={level.title} />
-              </Col>;
-            })}
-            <Col>
-              <SkillGroup data={data} title={'title'} />
-            </Col>
-          </Row>
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+    <Accordion.Item eventKey={competenceData._id}>
+      <Accordion.Header>{competenceData.name}</Accordion.Header>
+      <Accordion.Body>
+        <Row>
+          <SkillGroup
+            competenceId={competenceData._id}
+            key={competenceData._id + 'beginner'}
+            skillIds={levels.beginner}
+            title='beginner'
+          />
+          <SkillGroup
+            competenceId={competenceData._id}
+            key={competenceData._id + 'advanced'}
+            skillIds={levels.advanced}
+            title='advanced'
+          />
+          <SkillGroup
+            competenceId={competenceData._id}
+            key={competenceData._id + 'proficient'}
+            skillIds={levels.proficient}
+            title='proficient'
+          />
+          <SkillGroup
+            competenceId={competenceData._id}
+            key={competenceData._id + 'expert'}
+            skillIds={levels.expert}
+            title='expert'
+          />
+        </Row>
+      </Accordion.Body>
+    </Accordion.Item>
   );
 };
 

@@ -98,7 +98,9 @@ const updateCompetenceLevels = asyncHandler(async (req, res) => {
   const competence = await Competence.findOne({ _id: req.params.id });
 
   if (competence) {
-    competence.levels = req.body;
+    for (let key in req.body) {
+      competence.levels[key] = req.body[key];
+    }
 
     const updatedCompetence = await competence.save();
 

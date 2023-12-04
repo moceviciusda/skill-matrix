@@ -18,8 +18,8 @@ export const skillsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getSkills: builder.query({
-      query: () => ({
-        url: `${SKILLS_URL}`,
+      query: (queryParams) => ({
+        url: `${SKILLS_URL}?${new URLSearchParams(queryParams).toString()}`,
         method: 'GET',
       }),
     }),

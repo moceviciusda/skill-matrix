@@ -1,22 +1,31 @@
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useCreateSkillMutation } from '../../slices/skillsApiSlice';
+import { useUpdateCompetenceLevelsMutation } from '../../slices/competenceApiSlice';
 import { toast } from 'react-toastify';
 
-const AddSkill = ({ stateChanger, skills }) => {
+const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
   const [showForm, setShowForm] = useState(false);
   const [summary, setSummary] = useState('');
   const [description, setDescription] = useState('');
 
   const [createSkill, { isLoading }] = useCreateSkillMutation();
 
+  const [updateCompetenceLevels] = useUpdateCompetenceLevelsMutation();
+
   const submitHandler = async (e) => {
     e.preventDefault();
+
     try {
       const res = await createSkill({ summary, description }).unwrap();
-      toast.success('Skill created and added to group');
-      stateChanger([...skills, res]);
+      toast.success(`Skill created and added to ${title}`);
+      stateChanger([...skills, res._id]);
       setShowForm(false);
+
+      await updateCompetenceLevels({
+        id: competenceId,
+        [title]: [...skills, res._id],
+      }).unwrap();
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
