@@ -26,25 +26,25 @@ const Competence = ({ competenceData }) => {
           <SkillGroup
             competenceId={competenceData._id}
             key={competenceData._id + 'beginner'}
-            skillIds={levels.beginner}
+            skills={levels.beginner}
             title='beginner'
           />
           <SkillGroup
             competenceId={competenceData._id}
             key={competenceData._id + 'advanced'}
-            skillIds={levels.advanced}
+            skills={levels.advanced}
             title='advanced'
           />
           <SkillGroup
             competenceId={competenceData._id}
             key={competenceData._id + 'proficient'}
-            skillIds={levels.proficient}
+            skills={levels.proficient}
             title='proficient'
           />
           <SkillGroup
             competenceId={competenceData._id}
             key={competenceData._id + 'expert'}
-            skillIds={levels.expert}
+            skills={levels.expert}
             title='expert'
           />
         </Row>

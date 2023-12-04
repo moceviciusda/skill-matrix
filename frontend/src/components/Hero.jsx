@@ -1,4 +1,4 @@
-import { ButtonGroup } from 'react-bootstrap';
+import { ButtonGroup, Container } from 'react-bootstrap';
 import { useGetSkillsQuery } from '../slices/skillsApiSlice';
 import SkillGroup from './matrix/SkillGroup';
 import Competence from './matrix/Competence';
@@ -12,10 +12,9 @@ const Hero = () => {
   if (isLoading) return <></>;
 
   return (
-    <div>
+    <Container fluid>
       <Matrix />
-      {/* <Competence competenceData={data[0]}></Competence> */}
-    </div>
+    </Container>
   );
 };
 

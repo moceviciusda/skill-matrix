@@ -4,7 +4,6 @@ import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
 
 const Matrix = () => {
   const { data, isLoading } = useGetCompetenceQuery();
-  console.log(data);
 
   if (isLoading) return <></>;
 
