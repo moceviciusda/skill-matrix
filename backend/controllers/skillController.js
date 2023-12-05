@@ -31,6 +31,20 @@ const createSkill = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get skill by id
+// route    GET /api/skills/:id
+// @access  Private
+const getSkill = asyncHandler(async (req, res) => {
+  const skill = await Skill.findById(req.params.id);
+
+  if (skill) {
+    res.status(201).json(skill);
+  } else {
+    res.status(400);
+    throw new Error('Skill not found');
+  }
+});
+
 // @desc    Get skills
 // route    GET /api/skills
 // @access  Private
@@ -49,7 +63,7 @@ const getSkills = asyncHandler(async (req, res) => {
 // route    PUT /api/skills
 // @access  Private
 const updateSkill = asyncHandler(async (req, res) => {
-  const skill = await Skill.findById(req.body._id);
+  const skill = await Skill.findById(req.params.id);
 
   if (skill) {
     skill.summary = req.body.summary || skill.summary;
@@ -72,7 +86,7 @@ const updateSkill = asyncHandler(async (req, res) => {
 // route    DELETE /api/skills
 // @access  Private
 const deleteSkill = asyncHandler(async (req, res) => {
-  const skill = await Skill.findById(req.body._id);
+  const skill = await Skill.findById(req.params.id);
 
   if (skill) {
     Skill.deleteOne({ _id: skill._id }).then(() => {
@@ -84,4 +98,4 @@ const deleteSkill = asyncHandler(async (req, res) => {
   }
 });
 
-export { createSkill, getSkills, updateSkill, deleteSkill };
+export { createSkill, getSkill, getSkills, updateSkill, deleteSkill };

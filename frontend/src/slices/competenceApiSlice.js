@@ -10,6 +10,20 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    getCompetences: builder.query({
+      query: (queryParams) => ({
+        url: `${COMPETENCES_URL}?${new URLSearchParams(
+          queryParams
+        ).toString()}`,
+        method: 'GET',
+      }),
+    }),
+    getCompetence: builder.query({
+      query: (id) => ({
+        url: `${COMPETENCES_URL}/${id}`,
+        method: 'GET',
+      }),
+    }),
     updateCompetence: builder.mutation({
       query: (data) => ({
         url: `${COMPETENCES_URL}`,
@@ -18,18 +32,10 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     updateCompetenceLevels: builder.mutation({
-      query: (data) => ({
-        url: `${COMPETENCES_URL}/${data.id}/levels`,
+      query: ([data, id]) => ({
+        url: `${COMPETENCES_URL}/${id}/levels`,
         method: 'PUT',
         body: data,
-      }),
-    }),
-    getCompetence: builder.query({
-      query: (queryParams) => ({
-        url: `${COMPETENCES_URL}?${new URLSearchParams(
-          queryParams
-        ).toString()}`,
-        method: 'GET',
       }),
     }),
   }),
@@ -37,7 +43,8 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useCreateCompetenceMutation,
+  useGetCompetencesQuery,
+  useGetCompetenceQuery,
   useUpdateCompetenceMutation,
   useUpdateCompetenceLevelsMutation,
-  useGetCompetenceQuery,
 } = competencesApiSlice;

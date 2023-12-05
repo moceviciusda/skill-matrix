@@ -5,84 +5,87 @@ import {
   Col,
   OverlayTrigger,
   Popover,
-  Form,
 } from 'react-bootstrap';
-import { FaTrashAlt, FaInfoCircle, FaWeightHanging } from 'react-icons/fa';
-import { useState } from 'react';
-import { useGetSkillsQuery } from '../../slices/skillsApiSlice';
+import { FaTrashAlt, FaInfoCircle } from 'react-icons/fa';
+import { useGetSkillQuery } from '../../slices/skillsApiSlice';
+import Weight from './Weight';
 
 const BuilderSkill = ({ skill, removeSkillHandler, submitWeightHandler }) => {
-  const [showWeightForm, setShowWeightForm] = useState(false);
-  // const [weight, setWeight] = useState(skill.weight);
+  const { data, isLoading } = useGetSkillQuery(skill.skillId);
 
-  const { data, isLoading } = useGetSkillsQuery({
-    _id: skill.skillId,
-  });
-
-  const renderDescription = (props) => (
-    <Popover id={`${skill.skillId}-popover`} {...props}>
-      <Popover.Header>Description</Popover.Header>
-      <Popover.Body>{data[0].description}</Popover.Body>
+  const renderDescriptionPopover = (props) => (
+    <Popover id={`${skill.skillId}-description`} {...props}>
+      <Popover.Header>Skill Description</Popover.Header>
+      <Popover.Body>{data.description}</Popover.Body>
     </Popover>
   );
 
-  const submitWeight = (e) => {
-    submitWeightHandler(e, skill);
-    setShowWeightForm(false);
-  };
+  const renderWeightPopover = (props) => (
+    <Popover id={`${skill.skillId}-weight`} {...props}>
+      <Popover.Header>Skill Weight: {skill.weight}</Popover.Header>
+      <Popover.Body>
+        Used to determine importance of skill within level.
+        <br /> Completion ratio of competence level is calculated by dividing
+        weight sum of acquired skills by weight sum of skills within level
+      </Popover.Body>
+    </Popover>
+  );
 
   if (isLoading) return <></>;
 
   return (
-    <ListGroup.Item id={skill.skillId}>
-      {/* <Container fluid> */}
-      <Row>
-        <Col>{data[0].summary}</Col>
-        <Col md={2}>
-          <Row>
-            <OverlayTrigger
-              placement='right'
-              delay={{ show: 250, hide: 400 }}
-              overlay={renderDescription}
-            >
-              <Container>
-                <FaInfoCircle size={20} color='grey' />
-              </Container>
-            </OverlayTrigger>
-          </Row>
-          <Row>
-            <Container title='weight'>
-              {!showWeightForm ? (
-                <FaWeightHanging
-                  size={20}
-                  onClick={() => setShowWeightForm(true)}
+    <ListGroup.Item id={skill.skillId} style={{ padding: 10 }}>
+      <Row
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Col style={{ flex: 1, paddingRight: 0 }}>{data.summary}</Col>
+        <Col style={{ flexGrow: 0, flexBasis: '30px', padding: 0 }}>
+          <Container
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'end',
+              justifyContent: 'space-between',
+              minHeight: 90,
+            }}
+          >
+            <Row>
+              <OverlayTrigger
+                placement='right'
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderDescriptionPopover}
+              >
+                <Col>
+                  <FaInfoCircle color='grey' />
+                </Col>
+              </OverlayTrigger>
+            </Row>
+            <Row>
+              <OverlayTrigger
+                placement='right'
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderWeightPopover}
+              >
+                <Col>
+                  <Weight onSubmit={submitWeightHandler} obj={skill} />
+                </Col>
+              </OverlayTrigger>
+            </Row>
+            <Row>
+              <Col title='remove'>
+                <FaTrashAlt
+                  color='crimson'
+                  onClick={() => removeSkillHandler(skill.skillId)}
                 />
-              ) : (
-                <Form.Control
-                  style={{ width: '30px' }}
-                  size='sm'
-                  type='text'
-                  defaultValue={skill.weight}
-                  // onChange={(e) => setWeight(e.target.value)}
-                  onBlur={(e) => submitWeight(e)}
-                  autoFocus
-                  onFocus={(e) => e.target.select()}
-                />
-              )}
-            </Container>
-          </Row>
-          <Row>
-            <Container title='remove'>
-              <FaTrashAlt
-                size={20}
-                color='crimson'
-                onClick={() => removeSkillHandler(skill.skillId)}
-              />
-            </Container>
-          </Row>
+              </Col>
+            </Row>
+          </Container>
         </Col>
       </Row>
-      {/* </Container> */}
     </ListGroup.Item>
   );
 };

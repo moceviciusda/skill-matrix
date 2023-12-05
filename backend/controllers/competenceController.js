@@ -3,9 +3,8 @@ import Competence from '../models/competenceModel.js';
 
 // @desc    Create a new competence
 // route    POST /api/competences
-// @access  Private
+// @access  Private && Admin
 const createCompetence = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const { name, type, category } = req.body;
   const levels = req.body.levels || [];
 
@@ -37,10 +36,10 @@ const createCompetence = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get competence
+// @desc    Get competences
 // route    GET /api/competences
 // @access  Private
-const getCompetence = asyncHandler(async (req, res) => {
+const getCompetences = asyncHandler(async (req, res) => {
   const competence = await Competence.find(req.query);
 
   if (competence) {
@@ -51,11 +50,25 @@ const getCompetence = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update competence
-// route    PUT /api/competences
+// @desc    Get competence by id
+// route    GET /api/competences/:id
 // @access  Private
+const getCompetence = asyncHandler(async (req, res) => {
+  const competence = await Competence.findById(req.params.id);
+
+  if (competence) {
+    res.status(201).json(competence);
+  } else {
+    res.status(400);
+    throw new Error('No competences found');
+  }
+});
+
+// @desc    Update competence
+// route    PUT /api/competences/:id
+// @access  Private && Admin
 const updateCompetence = asyncHandler(async (req, res) => {
-  const competence = await Competence.findById(req.body._id).select('-_id');
+  const competence = await Competence.findById(req.params.id);
 
   if (competence) {
     for (let key in req.body) {
@@ -77,11 +90,27 @@ const updateCompetence = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete competence by id
+// route    DELETE /api/competences/:id
+// @access  Private && Admin
+const deleteCompetence = asyncHandler(async (req, res) => {
+  const competence = await Competence.findById(req.params.id);
+
+  if (competence) {
+    Competence.deleteOne({ _id: competence._id }).then(() => {
+      res.status(204).json({ message: 'Competence deleted successfully' });
+    });
+  } else {
+    res.status(404);
+    throw new Error('Competence not found');
+  }
+});
+
 // @desc    Get competence levels
-// route    GET /api/competences/{id}/levels
+// route    GET /api/competences/:id/levels
 // @access  Private
 const getCompetenceLevels = asyncHandler(async (req, res) => {
-  const competence = await Competence.findOne({ _id: req.params.id });
+  const competence = await Competence.findById(req.params.id);
 
   if (competence) {
     res.status(201).json(competence.levels);
@@ -91,11 +120,11 @@ const getCompetenceLevels = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get competence levels
-// route    PUT /api/competences/{id}/levels
-// @access  Private
+// @desc    Update competence levels
+// route    PUT /api/competences/:id/levels
+// @access  Private && Admin
 const updateCompetenceLevels = asyncHandler(async (req, res) => {
-  const competence = await Competence.findOne({ _id: req.params.id });
+  const competence = await Competence.findById(req.params.id);
 
   if (competence) {
     for (let key in req.body) {
@@ -119,8 +148,10 @@ const updateCompetenceLevels = asyncHandler(async (req, res) => {
 
 export {
   createCompetence,
+  getCompetences,
   getCompetence,
   updateCompetence,
   getCompetenceLevels,
   updateCompetenceLevels,
+  deleteCompetence,
 };

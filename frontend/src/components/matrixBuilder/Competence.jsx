@@ -1,64 +1,76 @@
-import { Container, Row, Accordion, Col } from 'react-bootstrap';
+import { Container, Accordion, Row, Col } from 'react-bootstrap';
 import SkillGroup from './SkillGroup';
+import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
+import Loader from '../Loader';
+import { FaWeightHanging, FaTrashAlt } from 'react-icons/fa';
+import Weight from './Weight';
 
-const Competence = ({ competenceData }) => {
-  // const [levels, setLevels] = useState(competenceData.levels);
+const Competence = ({
+  competence,
+  removeCompetenceHandler,
+  submitWeightHandler,
+}) => {
+  const { data, isLoading } = useGetCompetenceQuery(competence.competenceId);
 
-  // const { data = [], isLoading } = useGetSkillsQuery({
-  //   _id: '65697727338bab6405f1c028',
-  // });
+  const removeCompetence = () => {
+    console.log('remove competence');
+  };
 
-  // console.log(data);
-  // console.log(competenceData);
-  // competenceData.levels.map((level) => {
-  //   console.log(level);
-  // });
+  const submitWeight = () => {
+    console.log('weight set');
+  };
 
-  // if (isLoading) return <></>;
+  if (isLoading) return <Loader />;
 
   return (
-    <Accordion.Item eventKey={competenceData._id}>
-      <Accordion.Header>{competenceData.name}</Accordion.Header>
+    <Accordion.Item eventKey={data._id}>
+      <Accordion.Header style={{ display: 'flex' }}>
+        <Container>{data.name}</Container>
+        <Container style={{ flexGrow: 0 }}>
+          <Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Col style={{ flexGrow: 0 }} onClick={(e) => e.stopPropagation()}>
+              <Weight
+                size={20}
+                onSubmit={submitWeightHandler}
+                obj={competence}
+              />
+            </Col>
+            <Col style={{ flexGrow: 0 }} onClick={(e) => e.stopPropagation()}>
+              <FaTrashAlt
+                size={20}
+                color='crimson'
+                onClick={() => removeCompetenceHandler(competence)}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </Accordion.Header>
+      <Accordion.Body
+        style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+          gap: 12,
+          flexWrap: 'wrap',
+        }}
+      >
+        {Object.keys(data.levels).map(
+          (level) =>
+            level !== '_id' && (
+              <SkillGroup
+                competenceId={data._id}
+                key={data._id + level}
+                skills={data.levels[level]}
+                title={level}
+                style={{ flex: 1 }}
+              />
+            )
+        )}
+      </Accordion.Body>
       <Accordion.Body>
         <Container className='card' fluid>
           ssasa
         </Container>
-      </Accordion.Body>
-      <Accordion.Body>
-        <Row>
-          <Col>
-            <SkillGroup
-              competenceId={competenceData._id}
-              key={competenceData._id + 'beginner'}
-              skills={competenceData.levels.beginner}
-              title='beginner'
-            />
-          </Col>
-          <Col>
-            <SkillGroup
-              competenceId={competenceData._id}
-              key={competenceData._id + 'advanced'}
-              skills={competenceData.levels.advanced}
-              title='advanced'
-            />
-          </Col>
-          <Col>
-            <SkillGroup
-              competenceId={competenceData._id}
-              key={competenceData._id + 'proficient'}
-              skills={competenceData.levels.proficient}
-              title='proficient'
-            />
-          </Col>
-          <Col>
-            <SkillGroup
-              competenceId={competenceData._id}
-              key={competenceData._id + 'expert'}
-              skills={competenceData.levels.expert}
-              title='expert'
-            />
-          </Col>
-        </Row>
       </Accordion.Body>
     </Accordion.Item>
   );

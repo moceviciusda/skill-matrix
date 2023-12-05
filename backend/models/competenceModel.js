@@ -17,7 +17,6 @@ const competenceSchema = mongoose.Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
     },
     type: {
       type: String,

@@ -1,5 +1,14 @@
-import { Navbar, Nav, Container, NavDropdown, Badge } from 'react-bootstrap';
-import { FaSignInAlt, FaSignOutAlt, FaRegistered } from 'react-icons/fa';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import {
+  FaSignInAlt,
+  FaSignOutAlt,
+  FaRegistered,
+  FaListUl,
+  FaTasks,
+} from 'react-icons/fa';
+import { FaListCheck } from 'react-icons/fa6';
+import { BsGrid1X2 } from 'react-icons/bs';
+import { CgProfile } from 'react-icons/cg';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -33,17 +42,37 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <Nav className='me-auto'>
+              {userInfo && (
+                <>
+                  <LinkContainer to='/'>
+                    <Nav.Link>
+                      <FaTasks /> Assignments
+                    </Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
+              {userInfo?.role === 'admin' && (
+                <>
+                  <LinkContainer to='/builder'>
+                    <Nav.Link>
+                      <BsGrid1X2 /> Matrix Builder
+                    </Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
+            </Nav>
             <Nav className='ms-auto'>
               {userInfo ? (
                 <>
-                  <NavDropdown title={userInfo.name} id='username'>
-                    <LinkContainer to='/profile'>
-                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item onClick={logoutHandler}>
-                      <FaSignOutAlt /> Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                  <LinkContainer to='/profile'>
+                    <Nav.Link>
+                      <CgProfile /> {userInfo.name}
+                    </Nav.Link>
+                  </LinkContainer>
+                  <Nav.Link onClick={logoutHandler}>
+                    <FaSignOutAlt /> Logout
+                  </Nav.Link>
                 </>
               ) : (
                 <>

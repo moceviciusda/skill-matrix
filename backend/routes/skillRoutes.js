@@ -1,18 +1,23 @@
-import express from 'express'
-const router = express.Router()
+import express from 'express';
+const router = express.Router();
 import {
-    createSkill,
-    getSkills,
-    updateSkill,
-    deleteSkill
-} from '../controllers/skillController.js'
-import { protect, validateRole } from '../middleware/authMiddleware.js'
+  createSkill,
+  getSkill,
+  getSkills,
+  updateSkill,
+  deleteSkill,
+} from '../controllers/skillController.js';
+import { protect, validateRole } from '../middleware/authMiddleware.js';
 
+router
+  .route('/')
+  .post(protect, validateRole, createSkill)
+  .get(protect, getSkills);
 
-router.route('/')
-    .post(protect, validateRole, createSkill)
-    .get(protect, getSkills)
-    .put(protect, validateRole, updateSkill)
-    .delete(protect, validateRole, deleteSkill)
+router
+  .route('/:id')
+  .put(protect, validateRole, updateSkill)
+  .get(protect, getSkill)
+  .delete(protect, validateRole, deleteSkill);
 
-export default router
+export default router;

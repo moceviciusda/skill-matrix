@@ -12,10 +12,12 @@ import App from './App.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import AdminRoute from './components/AdminRoute.jsx';
 import HomeScreen from './screens/HomeScreen.jsx';
 import LoginScreen from './screens/LoginScreen.jsx';
 import RegisterScreen from './screens/RegisterScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen.jsx';
+import MatrixBuilderScreen from './screens/MatrixBuilderScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +29,11 @@ const router = createBrowserRouter(
       {/* Private Routes*/}
       <Route path='' element={<PrivateRoute />}>
         <Route path='/profile' element={<ProfileScreen />} />
+      </Route>
+
+      {/* Admin Routes*/}
+      <Route path='' element={<AdminRoute />}>
+        <Route path='/builder/:id?' element={<MatrixBuilderScreen />} />
       </Route>
     </Route>
   )

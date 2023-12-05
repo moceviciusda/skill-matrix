@@ -1,12 +1,10 @@
 import { ToggleButton } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
-import { useGetSkillsQuery } from '../../slices/skillsApiSlice';
+import { useGetSkillQuery } from '../slices/skillsApiSlice';
 
 const Skill = ({ id }) => {
   const [checked, setChecked] = useState(false);
-  const { data, isLoading } = useGetSkillsQuery({
-    _id: id,
-  });
+  const { data, isLoading } = useGetSkillQuery(id);
 
   const changeHandler = (e) => {
     setChecked(e.currentTarget.checked);
@@ -24,7 +22,7 @@ const Skill = ({ id }) => {
       // value='1'
       onChange={changeHandler}
     >
-      {data[0].summary}
+      {data.summary}
     </ToggleButton>
   );
 };

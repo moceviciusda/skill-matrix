@@ -36,10 +36,10 @@ const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
       setShowForm(false);
       stateChanger([...skills, { weight: 1, skillId: res._id }]);
 
-      await updateCompetenceLevels({
-        id: competenceId,
-        [title]: [...skills, { weight: 1, skillId: res._id }],
-      }).unwrap();
+      await updateCompetenceLevels([
+        { [title]: [...skills, { weight: 1, skillId: res._id }] },
+        competenceId,
+      ]).unwrap();
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -54,8 +54,15 @@ const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
           variant='primary'
           onClick={() => setShowForm(true)}
         >
-          <Container>
-            <FaPlusSquare size={20} color='green' /> New Skill
+          <Container
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+            }}
+          >
+            <FaPlusSquare color='green' /> New Skill
           </Container>
         </ListGroup.Item>
       ) : (
@@ -75,8 +82,15 @@ const AddSkill = ({ stateChanger, skills, competenceId, title }) => {
             />
           </ListGroup.Item>
           <ListGroup.Item action className='mb-2' variant='primary'>
-            <Container>
-              <FaPlusSquare size={20} color='green' /> Submit
+            <Container
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '12px',
+              }}
+            >
+              <FaPlusSquare color='green' /> Submit
             </Container>
           </ListGroup.Item>
         </Form>

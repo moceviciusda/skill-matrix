@@ -1,33 +1,53 @@
-import { Tabs, Tab, Container, Row, Col } from 'react-bootstrap';
+import { Tab, Row, Col, Nav } from 'react-bootstrap';
 import CompetenceCategory from './CompetenceCategory';
+import { useParams } from 'react-router-dom';
+import { useGetMatrixQuery } from '../../slices/matrixApiSlice';
+import Loader from '../Loader';
 
 const Matrix = () => {
+  const { id } = useParams();
+  if (!id) return <>Create NEW MATRIX</>;
+
+  const { data, isLoading } = useGetMatrixQuery(id);
+  if (isLoading) return <Loader />;
+
   return (
-    <Tabs defaultActiveKey='1' id='uncontrolled-tab-example' className='mb-3'>
-      <Tab eventKey='1' title='Procedures'>
-        <Container fluid>
-          <Row>
-            <Col>tests</Col>
-          </Row>
-        </Container>
-        <CompetenceCategory />
-      </Tab>
-      <Tab eventKey='2' title='Testing'>
-        Testing competences
-      </Tab>
-      <Tab eventKey='3' title='Communication'>
-        Communication competences
-      </Tab>
-      <Tab eventKey='4' title='Projects'>
-        Projects competences
-      </Tab>
-      <Tab eventKey='5' title='Higher Level'>
-        Higher Level competences
-      </Tab>
-      <Tab eventKey='6' title='New'>
-        Add new competence category
-      </Tab>
-    </Tabs>
+    <Tab.Container
+      id='left-tabs-example'
+      defaultActiveKey={data.categories[0].name}
+    >
+      <Row>
+        <Col sm={2} style={{ paddingRight: 0 }}>
+          <Nav
+            variant='pills'
+            className='flex-column'
+            style={{ top: 12, position: 'sticky' }}
+          >
+            {data.categories.map((category) => (
+              <Nav.Item key={category.name}>
+                <Nav.Link eventKey={category.name}>{category.name}</Nav.Link>
+              </Nav.Item>
+            ))}
+            <Nav.Item>
+              <Nav.Link eventKey='Add Category'>Add Category</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Col>
+        <Col sm={10}>
+          <Tab.Content>
+            {data.categories.map((category) => (
+              <Tab.Pane key={category.name} eventKey={category.name}>
+                <CompetenceCategory
+                  category={category}
+                  categories={data.categories}
+                />
+              </Tab.Pane>
+            ))}
+            <Tab.Pane eventKey='Add Category'>Add category component</Tab.Pane>
+          </Tab.Content>
+        </Col>
+      </Row>
+    </Tab.Container>
   );
 };
 

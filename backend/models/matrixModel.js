@@ -1,10 +1,30 @@
 import mongoose from 'mongoose';
+const competenceListSchema = mongoose.Schema({
+  weight: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  competenceId: {
+    type: String,
+    required: true,
+  },
+});
 
-const levelSchema = mongoose.Schema({
-  beginner: [String],
-  advanced: [String],
-  proficient: [String],
-  expert: [String],
+const categorySchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  weight: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
+  competences: {
+    type: [competenceListSchema],
+    default: [],
+  },
 });
 
 const matrixSchema = mongoose.Schema(
@@ -12,19 +32,15 @@ const matrixSchema = mongoose.Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
     },
-    type: {
-      type: String,
-      required: true,
+    categories: {
+      type: [categorySchema],
+      default: [],
     },
-    category: {
-      type: String,
-      required: true,
-    },
-    levels: levelSchema,
+    ownerId: String,
   },
   {
+    collection: 'matrices',
     timestamps: true,
   }
 );

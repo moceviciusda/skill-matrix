@@ -11,10 +11,22 @@ export const skillsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     updateSkill: builder.mutation({
-      query: (data) => ({
-        url: `${SKILLS_URL}`,
+      query: (id, data) => ({
+        url: `${SKILLS_URL}/${id}`,
         method: 'PUT',
         body: data,
+      }),
+    }),
+    getSkill: builder.query({
+      query: (id) => ({
+        url: `${SKILLS_URL}/${id}`,
+        method: 'GET',
+      }),
+    }),
+    deleteSkill: builder.mutation({
+      query: (id) => ({
+        url: `${SKILLS_URL}/${id}`,
+        method: 'DELETE',
       }),
     }),
     getSkills: builder.query({
@@ -23,19 +35,13 @@ export const skillsApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
-    deleteSkill: builder.mutation({
-      query: (data) => ({
-        url: `${SKILLS_URL}`,
-        method: 'DELETE',
-        body: data,
-      }),
-    }),
   }),
 });
 
 export const {
   useCreateSkillMutation,
   useUpdateSkillMutation,
-  useGetSkillsQuery,
+  useGetSkillQuery,
   useDeleteSkillMutation,
+  useGetSkillsQuery,
 } = skillsApiSlice;
