@@ -9,7 +9,8 @@ import {
 import store from './store.js';
 import { Provider } from 'react-redux';
 import App from './App.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import theme from './theme.js';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import AdminRoute from './components/AdminRoute.jsx';
@@ -18,6 +19,7 @@ import LoginScreen from './screens/LoginScreen.jsx';
 import RegisterScreen from './screens/RegisterScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen.jsx';
 import MatrixBuilderScreen from './screens/MatrixBuilderScreen.jsx';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,7 +44,10 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <RouterProvider router={router} />
+      </ChakraProvider>
     </React.StrictMode>
   </Provider>
 );

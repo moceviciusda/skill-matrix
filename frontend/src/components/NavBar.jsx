@@ -11,11 +11,13 @@ import { BsGrid1X2 } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
+import { HStack, Heading } from '@chakra-ui/react';
+import ColorModeSwitch from './ColorModeSwitch';
 
-const Header = () => {
+const NavBar = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -35,11 +37,18 @@ const Header = () => {
 
   return (
     <header>
+      <HStack justifyContent='space-between' p='10px'>
+        <NavLink to='/'>
+          <Heading fontSize='lg'>Skill-Matrix</Heading>
+        </NavLink>
+        <ColorModeSwitch />
+      </HStack>
+
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
         <Container>
-          <LinkContainer to='/'>
+          <NavLink to='/'>
             <Navbar.Brand>Skill-Matrix</Navbar.Brand>
-          </LinkContainer>
+          </NavLink>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
@@ -96,4 +105,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default NavBar;
