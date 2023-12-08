@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import NavBar from './components/NavBar';
+import NavBar from './components/navBar/NavBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Grid, GridItem } from '@chakra-ui/react';
@@ -8,8 +8,8 @@ import { Grid, GridItem } from '@chakra-ui/react';
 const App = () => {
   return (
     <Grid templateAreas={"'nav' 'main'"}>
-      <GridItem area='nav' bg='coral'>
-        <NavBar />
+      <GridItem area='nav'>
+        <NavBar m={0} p={5} />
         <ToastContainer />
       </GridItem>
 

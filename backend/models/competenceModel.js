@@ -1,16 +1,19 @@
 import mongoose from 'mongoose';
 
-const competenceSkillSchema = mongoose.Schema({
-  weight: {
-    type: Number,
-    required: true,
-    default: 1,
+const competenceSkillSchema = mongoose.Schema(
+  {
+    weight: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+    skillId: {
+      type: String,
+      required: true,
+    },
   },
-  skillId: {
-    type: String,
-    required: true,
-  },
-});
+  { _id: false }
+);
 
 const competenceSchema = mongoose.Schema(
   {
@@ -31,6 +34,7 @@ const competenceSchema = mongoose.Schema(
       advanced: [competenceSkillSchema],
       proficient: [competenceSkillSchema],
       expert: [competenceSkillSchema],
+      _id: false,
     },
   },
   {

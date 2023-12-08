@@ -1,31 +1,37 @@
 import mongoose from 'mongoose';
-const competenceListSchema = mongoose.Schema({
-  weight: {
-    type: Number,
-    required: true,
-    default: 1,
+const competenceListSchema = mongoose.Schema(
+  {
+    weight: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+    competenceId: {
+      type: String,
+      required: true,
+    },
   },
-  competenceId: {
-    type: String,
-    required: true,
-  },
-});
+  { _id: false }
+);
 
-const categorySchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const categorySchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    weight: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+    competences: {
+      type: [competenceListSchema],
+      default: [],
+    },
   },
-  weight: {
-    type: Number,
-    required: true,
-    default: 1,
-  },
-  competences: {
-    type: [competenceListSchema],
-    default: [],
-  },
-});
+  { _id: false }
+);
 
 const matrixSchema = mongoose.Schema(
   {
