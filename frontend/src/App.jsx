@@ -3,17 +3,18 @@ import { Container } from 'react-bootstrap';
 import NavBar from './components/navBar/NavBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Divider, Grid, GridItem } from '@chakra-ui/react';
 
 const App = () => {
   return (
     <Grid templateAreas={"'nav' 'main'"}>
       <GridItem area='nav'>
-        <NavBar m={0} p={5} />
+        <NavBar m={0} p={4} pl={12} pr={6} />
+        <Divider />
         <ToastContainer />
       </GridItem>
 
-      <GridItem area='main' bg='dodgerblue'>
+      <GridItem area='main'>
         <Container className='my-2' fluid>
           <Outlet />
         </Container>

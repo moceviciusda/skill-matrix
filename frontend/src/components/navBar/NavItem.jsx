@@ -1,13 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { HStack, Icon, Text } from '@chakra-ui/react';
-import { FaSignInAlt } from 'react-icons/fa';
+import { Text } from '@chakra-ui/react';
 
-const NavItem = ({ children, isLast, to = '/', icon, ...rest }) => {
+const NavItem = ({ children, isLast, to = '/', ...rest }) => {
   return (
     <NavLink to={to}>
-      {icon && <Icon as={icon} />}
       <Text
+        as='span'
         sx={{
           display: 'flex',
           flexWrap: 'nowrap',

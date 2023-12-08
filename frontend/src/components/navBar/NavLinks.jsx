@@ -1,4 +1,4 @@
-import { Box, Spacer, Stack } from '@chakra-ui/react';
+import { Box, Center, Divider, Spacer, Stack } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -51,11 +51,17 @@ const NavLinks = ({ isOpen }) => {
           </NavItem>
         )}
         {userInfo?.role === 'admin' && (
-          <NavItem to='/builder'>
-            <BsGrid1X2 /> Matrix Builder
-          </NavItem>
+          <>
+            <NavItem to='/builder'>
+              <BsGrid1X2 /> Matrix Builder
+            </NavItem>
+
+            <Center height='35px'>
+              <Divider orientation='vertical' />
+            </Center>
+          </>
         )}
-        <Spacer width={200} />
+
         <ColorModeSwitch />
 
         {userInfo ? (
@@ -69,11 +75,11 @@ const NavLinks = ({ isOpen }) => {
           </>
         ) : (
           <>
-            <NavItem to='/login' icon={FaSignInAlt}>
-              Sign In
+            <NavItem to='/login'>
+              <FaSignInAlt /> Sign In
             </NavItem>
-            <NavItem to='/register' icon={FaRegistered}>
-              Sign Up
+            <NavItem to='/register'>
+              <FaRegistered /> Sign Up
             </NavItem>
           </>
         )}
