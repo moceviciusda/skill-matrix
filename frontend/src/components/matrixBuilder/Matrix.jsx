@@ -25,20 +25,26 @@ const Matrix = () => {
       colorScheme='purple'
       p='12px'
     >
-      <TabList position='sticky' top='12px' alignSelf='flex-start' minW='200px'>
+      <TabList
+        position='sticky'
+        top='12px'
+        alignSelf='flex-start'
+        minW='200px'
+        gap={1}
+      >
         {data.categories.map((category) => (
-          <Button as={Tab} key={category.name} m='4px' variant='ghost'>
+          <Button as={Tab} key={category.name} variant='ghost'>
             {category.name}
           </Button>
         ))}
-        <Button as={Tab} key='addCategory' m='4px' variant='ghost'>
+        <Button as={Tab} key='addCategory' variant='ghost'>
           Add Category
         </Button>
       </TabList>
 
       <TabPanels>
         {data.categories.map((category) => (
-          <TabPanel key={category.name}>
+          <TabPanel key={category.name} p={0} pl={3}>
             <CompetenceCategory
               category={category}
               categories={data.categories}

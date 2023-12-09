@@ -1,4 +1,3 @@
-import { Accordion } from 'react-bootstrap';
 import Competence from './Competence';
 import { useState } from 'react';
 import {
@@ -8,6 +7,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AddCompetence from './AddCompetence';
+import { VStack } from '@chakra-ui/react';
 
 const CompetenceCategory = ({ category }) => {
   const [competenceList, setCompetenceList] = useState(category.competences);
@@ -78,20 +78,18 @@ const CompetenceCategory = ({ category }) => {
   };
 
   return (
-    <>
-      <Accordion alwaysOpen>
-        {competenceList.map((competence) => (
-          <Competence
-            key={competence.competenceId}
-            competence={competence}
-            removeCompetenceHandler={removeCompetenceHandler}
-            submitWeightHandler={submitWeightHandler}
-          ></Competence>
-        ))}
-      </Accordion>
+    <VStack>
+      {competenceList.map((competence) => (
+        <Competence
+          key={competence.competenceId}
+          competence={competence}
+          removeCompetenceHandler={removeCompetenceHandler}
+          submitWeightHandler={submitWeightHandler}
+        ></Competence>
+      ))}
 
       <AddCompetence />
-    </>
+    </VStack>
   );
 };
 

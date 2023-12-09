@@ -88,7 +88,12 @@ const SkillGroup = ({ competenceId, skills, title }) => {
         ))}
 
         {!isOpen && (
-          <Button colorScheme='purple' width='100%' onClick={onToggle}>
+          <Button
+            variant='outline'
+            colorScheme='purple'
+            width='100%'
+            onClick={onToggle}
+          >
             Add Skill
           </Button>
         )}

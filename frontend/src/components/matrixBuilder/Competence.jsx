@@ -2,8 +2,27 @@ import { Container, Accordion, Row, Col } from 'react-bootstrap';
 import SkillGroup from './SkillGroup';
 import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
 import Loader from '../Loader';
-import { FaWeightHanging, FaTrashAlt } from 'react-icons/fa';
+import {
+  FaWeightHanging,
+  FaTrashAlt,
+  FaChevronDown,
+  FaChevronUp,
+} from 'react-icons/fa';
 import SetWeightButton from './SetWeightButton';
+import {
+  Text,
+  useDisclosure,
+  Box,
+  Button,
+  Collapse,
+  HStack,
+  Card,
+  CardHeader,
+  CardBody,
+  Spacer,
+  IconButton,
+} from '@chakra-ui/react';
+import { IoClose } from 'react-icons/io5';
 
 const Competence = ({
   competence,
@@ -11,68 +30,54 @@ const Competence = ({
   submitWeightHandler,
 }) => {
   const { data, isLoading } = useGetCompetenceQuery(competence.competenceId);
-
-  const removeCompetence = () => {
-    console.log('remove competence');
-  };
-
-  const submitWeight = () => {
-    console.log('weight set');
-  };
+  const { isOpen, onToggle } = useDisclosure();
 
   if (isLoading) return <Loader />;
 
   return (
-    <Accordion.Item eventKey={data._id}>
-      <Accordion.Header style={{ display: 'flex' }}>
-        <Container>{data.name}</Container>
-        <Container style={{ flexGrow: 0 }}>
-          <Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Col style={{ flexGrow: 0 }} onClick={(e) => e.stopPropagation()}>
-              {/* <SetWeightButton
-                size={20}
-                onSubmit={submitWeightHandler}
-                obj={competence}
-              /> */}
-            </Col>
-            <Col style={{ flexGrow: 0 }} onClick={(e) => e.stopPropagation()}>
-              <FaTrashAlt
-                size={20}
-                color='crimson'
-                onClick={() => removeCompetenceHandler(competence)}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </Accordion.Header>
-      <Accordion.Body
-        style={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          gap: 12,
-          flexWrap: 'wrap',
-        }}
+    <Card w='100%'>
+      <Button
+        as='div'
+        p={6}
+        colorScheme='purple'
+        onClick={onToggle}
+        borderBottomRadius={!isOpen ? 0 : 6}
+        rightIcon={!isOpen ? <FaChevronUp /> : <FaChevronDown />}
       >
-        {Object.keys(data.levels).map(
-          (level) =>
-            level !== '_id' && (
-              <SkillGroup
-                competenceId={data._id}
-                key={data._id + level}
-                skills={data.levels[level]}
-                title={level}
-                style={{ flex: 1 }}
-              />
-            )
-        )}
-      </Accordion.Body>
-      <Accordion.Body>
-        <Container className='card' fluid>
-          ssasa
-        </Container>
-      </Accordion.Body>
-    </Accordion.Item>
+        <HStack gap='2px' flexGrow={1}>
+          <Text textTransform='capitalize'>{data.name}</Text>
+          <Spacer />
+          <SetWeightButton
+            size={20}
+            onSubmit={submitWeightHandler}
+            obj={competence}
+          />
+          <IconButton
+            icon={<IoClose size={20} />}
+            isRound={true}
+            variant='ghost'
+            onClick={() => removeCompetenceHandler(competence)}
+          />
+        </HStack>
+      </Button>
+      <CardBody p={0}>
+        <Box as={Collapse} in={!isOpen} animateOpacity p={2}>
+          <HStack alignItems='flex-start'>
+            {Object.keys(data.levels).map(
+              (level) =>
+                level !== '_id' && (
+                  <SkillGroup
+                    competenceId={data._id}
+                    key={data._id + level}
+                    skills={data.levels[level]}
+                    title={level}
+                  />
+                )
+            )}
+          </HStack>
+        </Box>
+      </CardBody>
+    </Card>
   );
 };
 

@@ -66,6 +66,7 @@ const AddSkillForm = ({
           <FormControl>
             <AutoComplete isLoading={isLoading} creatable maxSuggestions={5}>
               <AutoCompleteInput
+                borderRadius='6px'
                 autoFocus
                 placeholder='Summary'
                 size='sm'

@@ -1,4 +1,4 @@
-import { FaTrashAlt, FaInfoCircle } from 'react-icons/fa';
+import { FaEdit, FaInfoCircle, FaTrashAlt } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import { useGetSkillQuery } from '../../slices/skillsApiSlice';
 import SetWeightButton from './SetWeightButton';
@@ -9,20 +9,12 @@ import {
   Text,
   IconButton,
   CardHeader,
-  useColorModeValue,
+  Spacer,
 } from '@chakra-ui/react';
+import InfoHoverIcon from '../InfoHoverIcon';
 
 const BuilderSkill = ({ skill, removeSkillHandler, submitWeightHandler }) => {
   const { data, isLoading } = useGetSkillQuery(skill.skillId);
-
-  const colors = useColorModeValue('blackAlpha', 'gray');
-
-  // const renderDescriptionPopover = (props) => (
-  //   <Popover id={`${skill.skillId}-description`} {...props}>
-  //     <Popover.Header>Skill Description</Popover.Header>
-  //     <Popover.Body>{data.description}</Popover.Body>
-  //   </Popover>
-  // );
 
   if (isLoading) return <></>;
 
@@ -33,20 +25,29 @@ const BuilderSkill = ({ skill, removeSkillHandler, submitWeightHandler }) => {
       </CardHeader>
       <CardBody p={1}>
         <HStack justify='flex-end' gap='2px'>
-          {/* <OverlayTrigger
-          placement='right'
-          delay={{ show: 250, hide: 400 }}
-          overlay={renderDescriptionPopover}
-        > */}
-          <SetWeightButton onSubmit={submitWeightHandler} obj={skill} />
           <IconButton
-            icon={<FaInfoCircle />}
+            icon={<FaEdit />}
             isRound={true}
             variant='ghost'
-            colorScheme={colors}
+            // colorScheme='red'
+            onClick={() => console.log('Edit in DB')}
           />
-          {/* </OverlayTrigger> */}
+          <IconButton
+            icon={<FaTrashAlt />}
+            isRound={true}
+            variant='ghost'
+            colorScheme='red'
+            onClick={() => console.log('delete from DB')}
+          />
 
+          <Spacer />
+
+          <SetWeightButton onSubmit={submitWeightHandler} obj={skill} />
+          <InfoHoverIcon
+            icon={<FaInfoCircle />}
+            header='Skill Description'
+            body={data.description}
+          />
           <IconButton
             icon={<IoClose />}
             isRound={true}
@@ -54,13 +55,6 @@ const BuilderSkill = ({ skill, removeSkillHandler, submitWeightHandler }) => {
             colorScheme='red'
             onClick={() => removeSkillHandler(skill.skillId)}
           />
-          {/* <IconButton
-            icon={<FaTrashAlt />}
-            isRound={true}
-            variant='ghost'
-            colorScheme='red'
-            onClick={() => console.log(delete from DB)}
-          /> */}
         </HStack>
       </CardBody>
     </Card>
