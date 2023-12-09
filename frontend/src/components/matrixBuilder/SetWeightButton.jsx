@@ -5,10 +5,9 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Input,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { Form, OverlayTrigger, Popover } from 'react-bootstrap';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { FaWeightHanging } from 'react-icons/fa';
 
 const SetWeightButton = ({ onSubmit, obj }) => {

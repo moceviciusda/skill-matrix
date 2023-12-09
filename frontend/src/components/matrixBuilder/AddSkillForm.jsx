@@ -1,18 +1,14 @@
 import { useState } from 'react';
-import { Container } from 'react-bootstrap';
 import {
   useCreateSkillMutation,
   useGetSkillsQuery,
 } from '../../slices/skillsApiSlice';
 import { useUpdateCompetenceLevelsMutation } from '../../slices/competenceApiSlice';
 import { toast } from 'react-toastify';
-import { FaPlusSquare } from 'react-icons/fa';
 import {
-  Box,
   Card,
   Button,
   FormControl,
-  Input,
   Textarea,
   CardFooter,
   CardHeader,
