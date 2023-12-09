@@ -2,7 +2,14 @@ import CompetenceCategory from './CompetenceCategory';
 import { useParams } from 'react-router-dom';
 import { useGetMatrixQuery } from '../../slices/matrixApiSlice';
 import Loader from '../Loader';
-import { TabList, Tabs, Tab, TabPanels, TabPanel } from '@chakra-ui/react';
+import {
+  TabList,
+  Tabs,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Button,
+} from '@chakra-ui/react';
 
 const Matrix = () => {
   const { id } = useParams();
@@ -18,13 +25,15 @@ const Matrix = () => {
       colorScheme='purple'
       p='12px'
     >
-      <TabList minW='200px' position='sticky'>
+      <TabList position='sticky' top='12px' alignSelf='flex-start' minW='200px'>
         {data.categories.map((category) => (
-          <Tab key={category.name} m='4px'>
+          <Button as={Tab} key={category.name} m='4px' variant='ghost'>
             {category.name}
-          </Tab>
+          </Button>
         ))}
-        <Tab>Add Category</Tab>
+        <Button as={Tab} key='addCategory' m='4px' variant='ghost'>
+          Add Category
+        </Button>
       </TabList>
 
       <TabPanels>

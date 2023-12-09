@@ -1,11 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Text } from '@chakra-ui/react';
+import { Text, Button } from '@chakra-ui/react';
 
-const NavItem = ({ children, isLast, to = '/', ...rest }) => {
+const NavItem = ({
+  children,
+  isLast,
+  to = '/',
+  variant = 'ghost',
+  ...rest
+}) => {
   return (
     <NavLink to={to}>
-      <Text
+      <Button
         as='span'
         sx={{
           display: 'flex',
@@ -13,10 +19,11 @@ const NavItem = ({ children, isLast, to = '/', ...rest }) => {
           alignItems: 'center',
           gap: '4px',
         }}
+        variant={variant}
         {...rest}
       >
         {children}
-      </Text>
+      </Button>
     </NavLink>
   );
 };

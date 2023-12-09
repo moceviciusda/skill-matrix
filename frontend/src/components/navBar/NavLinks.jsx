@@ -1,4 +1,4 @@
-import { Box, Center, Divider, Spacer, Stack } from '@chakra-ui/react';
+import { Box, Button, Center, Divider, Spacer, Stack } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -39,10 +39,10 @@ const NavLinks = ({ isOpen }) => {
       flexBasis={{ base: '100%', md: 'auto' }}
     >
       <Stack
-        spacing={8}
+        spacing={1}
         align='center'
         justify={['center', 'space-between', 'flex-end', 'flex-end']}
-        direction={['column', 'row', 'row', 'row']}
+        direction={['column', 'column', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
         {userInfo && (
@@ -56,7 +56,7 @@ const NavLinks = ({ isOpen }) => {
               <BsGrid1X2 /> Matrix Builder
             </NavItem>
 
-            <Center height='35px'>
+            <Center height='35px' paddingX={4}>
               <Divider orientation='vertical' />
             </Center>
           </>

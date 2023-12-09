@@ -3,7 +3,7 @@ import SkillGroup from './SkillGroup';
 import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
 import Loader from '../Loader';
 import { FaWeightHanging, FaTrashAlt } from 'react-icons/fa';
-import Weight from './Weight';
+import SetWeightButton from './SetWeightButton';
 
 const Competence = ({
   competence,
@@ -29,11 +29,11 @@ const Competence = ({
         <Container style={{ flexGrow: 0 }}>
           <Row style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Col style={{ flexGrow: 0 }} onClick={(e) => e.stopPropagation()}>
-              <Weight
+              {/* <SetWeightButton
                 size={20}
                 onSubmit={submitWeightHandler}
                 obj={competence}
-              />
+              /> */}
             </Col>
             <Col style={{ flexGrow: 0 }} onClick={(e) => e.stopPropagation()}>
               <FaTrashAlt

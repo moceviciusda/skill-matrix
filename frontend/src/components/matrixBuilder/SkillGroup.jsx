@@ -1,15 +1,26 @@
 import { useState } from 'react';
-import { ListGroup, Col, ListGroupItem, Row } from 'react-bootstrap';
 import { FaWeightHanging } from 'react-icons/fa';
 import BuilderSkill from './BuilderSkill';
-import AddSkill from './AddSkill';
+import AddSkillForm from './AddSkillForm';
 import { useUpdateCompetenceLevelsMutation } from '../../slices/competenceApiSlice';
 import { toast } from 'react-toastify';
+import {
+  Box,
+  Button,
+  HStack,
+  Spacer,
+  Text,
+  VStack,
+  Collapse,
+  useDisclosure,
+} from '@chakra-ui/react';
 
-const SkillGroup = ({ competenceId, skills, title, style }) => {
+const SkillGroup = ({ competenceId, skills, title }) => {
   const [skillsState, setSkillsState] = useState(skills);
 
   const [updateCompetenceLevels] = useUpdateCompetenceLevelsMutation();
+
+  const { isOpen, onToggle } = useDisclosure();
 
   const removeSkillHandler = async (skillId) => {
     const newSkills = skillsState.filter((skill) => skill.skillId !== skillId);
@@ -49,31 +60,57 @@ const SkillGroup = ({ competenceId, skills, title, style }) => {
   };
 
   return (
-    <ListGroup style={style}>
-      <ListGroupItem variant='dark'>
-        <Row>
-          <Col>{title}</Col>
-          <Col>
-            <FaWeightHanging /> Total:{' '}
-            {skillsState.reduce((acc, skill) => acc + skill.weight, 0)}
-          </Col>
-        </Row>
-      </ListGroupItem>
-      {skillsState.map((skill) => (
-        <BuilderSkill
-          key={skill.skillId}
-          skill={skill}
-          removeSkillHandler={removeSkillHandler}
-          submitWeightHandler={submitWeightHandler}
-        />
-      ))}
-      <AddSkill
-        stateChanger={setSkillsState}
-        skills={skillsState}
-        competenceId={competenceId}
-        title={title}
-      />
-    </ListGroup>
+    <Box flex={1}>
+      <Button
+        justifyContent='space-between'
+        colorScheme='gray'
+        fontSize={16}
+        width='100%'
+      >
+        <HStack gap='2px' flexGrow={1} paddingX={2}>
+          <Text textTransform='capitalize'>{title}</Text>
+          <Spacer />
+          <FaWeightHanging />
+          <Text>
+            Sum: {skillsState.reduce((acc, skill) => acc + skill.weight, 0)}
+          </Text>
+        </HStack>
+      </Button>
+
+      <VStack flex={1} gap='1px'>
+        {skillsState.map((skill) => (
+          <BuilderSkill
+            key={skill.skillId}
+            skill={skill}
+            removeSkillHandler={removeSkillHandler}
+            submitWeightHandler={submitWeightHandler}
+          />
+        ))}
+
+        {!isOpen && (
+          <Button colorScheme='purple' width='100%' onClick={onToggle}>
+            Add Skill
+          </Button>
+        )}
+        {isOpen && (
+          <Box
+            as={Collapse}
+            in={isOpen}
+            animateOpacity
+            width='100%'
+            overflow='visible'
+          >
+            <AddSkillForm
+              stateChanger={setSkillsState}
+              skills={skillsState}
+              competenceId={competenceId}
+              title={title}
+              toggle={onToggle}
+            />
+          </Box>
+        )}
+      </VStack>
+    </Box>
   );
 };
 
