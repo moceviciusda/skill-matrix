@@ -1,4 +1,3 @@
-import { Container, Accordion, Row, Col } from 'react-bootstrap';
 import SkillGroup from './SkillGroup';
 import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
 import Loader from '../Loader';
@@ -38,6 +37,7 @@ const Competence = ({
     <Card w='100%'>
       <Button
         as='div'
+        cursor='pointer'
         p={6}
         colorScheme='purple'
         onClick={onToggle}
@@ -62,7 +62,7 @@ const Competence = ({
       </Button>
       <CardBody p={0}>
         <Box as={Collapse} in={!isOpen} animateOpacity p={2}>
-          <HStack alignItems='flex-start'>
+          <HStack alignItems='flex-start' flexWrap='wrap'>
             {Object.keys(data.levels).map(
               (level) =>
                 level !== '_id' && (

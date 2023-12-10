@@ -10,6 +10,7 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
+  Portal,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FaWeightHanging } from 'react-icons/fa';
@@ -47,14 +48,17 @@ const SetWeightButton = ({ onSubmit, obj }) => {
             size='xs'
             defaultValue={obj.weight}
             min={0}
+            max={9999}
             onClick={(e) => e.stopPropagation()}
           >
             <NumberInputField
               borderRadius='10px'
               minW='55px'
               maxW='80px'
-              onBlur={(e) => submitWeight(e)}
               autoFocus
+              onFocus={(e) => e.target.select()}
+              onBlur={(e) => submitWeight(e)}
+              onKeyUp={(e) => e.key === 'Enter' && submitWeight(e)}
             />
             <NumberInputStepper>
               <NumberIncrementStepper />
@@ -63,16 +67,17 @@ const SetWeightButton = ({ onSubmit, obj }) => {
           </NumberInput>
         )}
       </PopoverTrigger>
-
-      <PopoverContent>
-        <PopoverHeader>Skill Weight: {obj.weight}</PopoverHeader>
-        <PopoverBody>
-          Used to determine importance of skill within level.
-          <br /> Competence level completion percentage is a ratio of {'('}
-          weight sum of acquired skills{')'} / {'('}weight sum of skills within
-          level{')'}
-        </PopoverBody>
-      </PopoverContent>
+      <Portal>
+        <PopoverContent>
+          <PopoverHeader>Skill Weight: {obj.weight}</PopoverHeader>
+          <PopoverBody>
+            Used to determine importance of skill within level.
+            <br /> Competence level completion percentage is a ratio of {'('}
+            weight sum of acquired skills{')'} / {'('}weight sum of skills
+            within level{')'}
+          </PopoverBody>
+        </PopoverContent>
+      </Portal>
     </Popover>
   );
 };

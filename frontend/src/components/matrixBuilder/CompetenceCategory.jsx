@@ -52,7 +52,6 @@ const CompetenceCategory = ({ category }) => {
         ...competence,
         weight: e.target.value,
       });
-      console.log(updatedCompetenceList);
 
       const updatedCategory = {
         ...category,

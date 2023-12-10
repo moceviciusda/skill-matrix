@@ -60,7 +60,7 @@ const AddSkillForm = ({
   };
 
   return (
-    <Card p={1} rounded='md'>
+    <Card p={1} rounded='md' variant='outline'>
       <form onSubmit={submitHandler}>
         <CardHeader p={1}>
           <FormControl>
@@ -73,12 +73,15 @@ const AddSkillForm = ({
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
               />
-              <AutoCompleteList>
+              <AutoCompleteList onChange={(event, value) => console.log(value)}>
                 {data.map((skill) => (
                   <AutoCompleteItem
                     key={skill._id}
                     value={skill.summary}
                     onClick={() => selectAutoCompleteHandler(skill)}
+                    // onKeyUp={(e) =>
+                    //   e.key === 'Enter' && selectAutoCompleteHandler(skill)
+                    // }
                   >
                     {skill.summary}
                   </AutoCompleteItem>

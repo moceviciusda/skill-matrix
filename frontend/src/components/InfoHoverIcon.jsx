@@ -6,6 +6,7 @@ import {
   PopoverTrigger,
   useColorModeValue,
   IconButton,
+  Portal,
 } from '@chakra-ui/react';
 
 const InfoHoverIcon = ({ icon, header, body, colorScheme }) => {
@@ -21,10 +22,12 @@ const InfoHoverIcon = ({ icon, header, body, colorScheme }) => {
           colorScheme={colorScheme ? colorScheme : colors}
         />
       </PopoverTrigger>
-      <PopoverContent>
-        <PopoverHeader>{header}</PopoverHeader>
-        <PopoverBody>{body}</PopoverBody>
-      </PopoverContent>
+      <Portal>
+        <PopoverContent>
+          <PopoverHeader>{header}</PopoverHeader>
+          <PopoverBody>{body}</PopoverBody>
+        </PopoverContent>
+      </Portal>
     </Popover>
   );
 };
