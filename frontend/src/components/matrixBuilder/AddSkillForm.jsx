@@ -45,15 +45,20 @@ const AddSkillForm = ({
     e.preventDefault();
 
     try {
-      const res = await createSkill({ summary, description }).unwrap();
-      toast.success(`Skill created and added to ${title}`);
-      toggle();
-      stateChanger([...skills, { weight: 1, skillId: res._id }]);
+      const skill =
+        data.find((s) => s.summary === summary) ||
+        (await createSkill({ summary, description }).unwrap());
 
+      const skillReference = { weight: 1, skillId: skill._id };
+
+      stateChanger([...skills, skillReference]);
       await updateCompetenceLevels([
-        { [title]: [...skills, { weight: 1, skillId: res._id }] },
+        { [title]: [...skills, skillReference] },
         competenceId,
       ]).unwrap();
+
+      toast.success(`Skill added to ${title}`);
+      toggle();
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -73,7 +78,7 @@ const AddSkillForm = ({
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
               />
-              <AutoCompleteList onChange={(event, value) => console.log(value)}>
+              <AutoCompleteList>
                 {data.map((skill) => (
                   <AutoCompleteItem
                     key={skill._id}
@@ -108,7 +113,6 @@ const AddSkillForm = ({
           <Button
             isLoading={createSkillObj.isLoading}
             colorScheme='purple'
-            // variant='outline'
             type='submit'
           >
             Submit

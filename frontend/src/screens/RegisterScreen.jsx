@@ -6,7 +6,6 @@ import FormContainer from '../components/FormContainer';
 import { useRegisterMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
-import Loader from '../components/Loader';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
@@ -93,7 +92,7 @@ const RegisterScreen = () => {
               Sign Up
             </Button>
           </Col>
-          <Col>{isLoading && <Loader />}</Col>
+          <Col>{isLoading && 'loading'}</Col>
         </Row>
 
         <Row className='py-3'>

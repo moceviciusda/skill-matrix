@@ -1,11 +1,7 @@
-import { Container } from 'react-bootstrap';
+import { Box } from '@chakra-ui/react';
 
 const Hero = () => {
-  return (
-    <Container fluid style={{ padding: 0 }}>
-      HERO
-    </Container>
-  );
+  return <Box>HERO</Box>;
 };
 
 export default Hero;

@@ -23,6 +23,12 @@ export const matrixApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getMatrices: builder.query({
+      query: (queryParams) => ({
+        url: `${MATRIX_URL}?${new URLSearchParams(queryParams).toString()}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -30,4 +36,5 @@ export const {
   useCreateMatrixMutation,
   useUpdateMatrixMutation,
   useGetMatrixQuery,
+  useGetMatricesQuery,
 } = matrixApiSlice;

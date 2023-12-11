@@ -66,6 +66,7 @@ const SkillGroup = ({ competenceId, skills, title }) => {
         colorScheme='gray'
         fontSize={16}
         width='100%'
+        cursor='default'
       >
         <HStack gap='2px' flexGrow={1} paddingX={2}>
           <Text textTransform='capitalize'>{title}</Text>

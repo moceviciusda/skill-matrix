@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Brand = (props) => {
   return (
-    <Box {...props} flexGrow={1}>
+    <Box {...props}>
       <NavLink to='/'>
         <Text fontSize='2xl' fontWeight='bold'>
           Skill-Matrix

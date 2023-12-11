@@ -8,12 +8,12 @@ const createCompetence = asyncHandler(async (req, res) => {
   const { name, type, category } = req.body;
   const levels = req.body.levels || [];
 
-  const competenceExists = await Competence.findOne({ name });
+  // const competenceExists = await Competence.findOne({ name });
 
-  if (competenceExists) {
-    res.status(400);
-    throw new Error('Competence already exists');
-  }
+  // if (competenceExists) {
+  //   res.status(400);
+  //   throw new Error('Competence already exists');
+  // }
 
   const competence = await Competence.create({
     name,

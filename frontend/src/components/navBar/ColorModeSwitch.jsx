@@ -23,7 +23,6 @@ const ColorModeSwitch = ({ variant = 'ghost' }) => {
         onChange={(e) => {
           e.stopPropagation();
           toggleColorMode();
-          console.log('switching');
         }}
       />
       Dark Mode

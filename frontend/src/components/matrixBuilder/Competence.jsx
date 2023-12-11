@@ -1,12 +1,6 @@
 import SkillGroup from './SkillGroup';
 import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
-import Loader from '../Loader';
-import {
-  FaWeightHanging,
-  FaTrashAlt,
-  FaChevronDown,
-  FaChevronUp,
-} from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaEdit } from 'react-icons/fa';
 import SetWeightButton from './SetWeightButton';
 import {
   Text,
@@ -16,12 +10,13 @@ import {
   Collapse,
   HStack,
   Card,
-  CardHeader,
   CardBody,
   Spacer,
   IconButton,
+  Input,
 } from '@chakra-ui/react';
 import { IoClose } from 'react-icons/io5';
+import { useState } from 'react';
 
 const Competence = ({
   competence,
@@ -30,8 +25,14 @@ const Competence = ({
 }) => {
   const { data, isLoading } = useGetCompetenceQuery(competence.competenceId);
   const { isOpen, onToggle } = useDisclosure();
+  const [editing, setEditing] = useState(false);
 
-  if (isLoading) return <Loader />;
+  const editName = (e) => {
+    e.target.value !== data.name && console.log(e.target.value);
+    setEditing(false);
+  };
+
+  if (isLoading) return <></>;
 
   return (
     <Card w='100%'>
@@ -45,7 +46,31 @@ const Competence = ({
         rightIcon={!isOpen ? <FaChevronUp /> : <FaChevronDown />}
       >
         <HStack gap='2px' flexGrow={1}>
-          <Text textTransform='capitalize'>{data.name}</Text>
+          {editing ? (
+            <Input
+              border={0}
+              _focusVisible={{ boxShadow: 'none', outline: 'none' }}
+              autoFocus
+              defaultValue={data.name}
+              onBlur={(e) => editName(e)}
+              onKeyUp={(e) => e.key === 'Enter' && editName(e)}
+            />
+          ) : (
+            <>
+              <Text textTransform='capitalize'>{data.name}</Text>
+              <IconButton
+                icon={<FaEdit />}
+                isRound={true}
+                variant='ghost'
+                // colorScheme='purple'
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setEditing(true);
+                }}
+              />
+            </>
+          )}
+
           <Spacer />
           <SetWeightButton
             size={20}

@@ -1,4 +1,5 @@
 import {
+  Button,
   IconButton,
   NumberInput,
   NumberInputField,
@@ -33,16 +34,18 @@ const SetWeightButton = ({ onSubmit, obj }) => {
     <Popover trigger='hover' colorScheme='green'>
       <PopoverTrigger>
         {!showWeightForm ? (
-          <IconButton
-            icon={<FaWeightHanging size={15} />}
+          <Button
+            leftIcon={<FaWeightHanging size={15} />}
             onClick={(e) => {
               e.stopPropagation();
               setShowWeightForm(true);
             }}
             variant='ghost'
-            isRound={true}
+            borderRadius='2em'
             // colorScheme='purple'
-          />
+          >
+            {obj.weight}
+          </Button>
         ) : (
           <NumberInput
             size='xs'

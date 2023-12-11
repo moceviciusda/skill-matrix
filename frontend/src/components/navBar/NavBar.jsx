@@ -11,8 +11,8 @@ const NavBar = (props) => {
   return (
     <NavBarContainer {...props}>
       <Brand
-        w='100px'
-        // color={['white', 'white', 'primary.500', 'primary.500']}
+      // w='100px'
+      // color={['white', 'white', 'primary.500', 'primary.500']}
       />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <NavLinks isOpen={isOpen} />

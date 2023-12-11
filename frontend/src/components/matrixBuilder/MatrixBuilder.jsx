@@ -1,7 +1,5 @@
 import CompetenceCategory from './CompetenceCategory';
-import { useParams } from 'react-router-dom';
 import { useGetMatrixQuery } from '../../slices/matrixApiSlice';
-import Loader from '../Loader';
 import {
   TabList,
   Tabs,
@@ -11,12 +9,9 @@ import {
   Button,
 } from '@chakra-ui/react';
 
-const Matrix = () => {
-  const { id } = useParams();
-  if (!id) return <>Create NEW MATRIX</>;
-
-  const { data, isLoading } = useGetMatrixQuery(id);
-  if (isLoading) return <Loader />;
+const MatrixBuilder = ({ matrixId }) => {
+  const { data, isLoading } = useGetMatrixQuery(matrixId);
+  if (isLoading) return <></>;
 
   return (
     <Tabs
@@ -57,4 +52,4 @@ const Matrix = () => {
   );
 };
 
-export default Matrix;
+export default MatrixBuilder;

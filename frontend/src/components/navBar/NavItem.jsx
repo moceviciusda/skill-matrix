@@ -1,14 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Text, Button } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 
-const NavItem = ({
-  children,
-  isLast,
-  to = '/',
-  variant = 'ghost',
-  ...rest
-}) => {
+const NavItem = ({ children, to = '/', variant = 'ghost', ...rest }) => {
   return (
     <NavLink to={to}>
       <Button

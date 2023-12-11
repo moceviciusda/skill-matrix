@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
 import NavBar from './components/navBar/NavBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,9 +14,7 @@ const App = () => {
       </GridItem>
 
       <GridItem area='main'>
-        <Container className='my-2' fluid>
-          <Outlet />
-        </Container>
+        <Outlet />
       </GridItem>
     </Grid>
   );
