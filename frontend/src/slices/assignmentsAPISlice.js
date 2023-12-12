@@ -11,7 +11,7 @@ export const assignmentsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     updateAssignment: builder.mutation({
-      query: (id, data) => ({
+      query: ([data, id]) => ({
         url: `${ASSIGNMENTS_URL}/${id}`,
         method: 'PUT',
         body: data,

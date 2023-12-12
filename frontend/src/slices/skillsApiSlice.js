@@ -11,7 +11,7 @@ export const skillsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     updateSkill: builder.mutation({
-      query: (id, data) => ({
+      query: ([data, id]) => ({
         url: `${SKILLS_URL}/${id}`,
         method: 'PUT',
         body: data,
