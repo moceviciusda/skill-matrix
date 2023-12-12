@@ -14,6 +14,7 @@ import {
 } from 'react-icons/fa';
 import { BsGrid1X2 } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
+import { RiTeamLine } from 'react-icons/ri';
 
 const NavLinks = ({ isOpen }) => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -54,6 +55,9 @@ const NavLinks = ({ isOpen }) => {
           <>
             <NavItem to='/builder'>
               <BsGrid1X2 /> Matrix Builder
+            </NavItem>
+            <NavItem to='/'>
+              <RiTeamLine /> My Team
             </NavItem>
 
             <Center height='35px' paddingX={4}>

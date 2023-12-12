@@ -22,7 +22,7 @@ const MatrixBuilder = ({ matrixId }) => {
   const addCategoryHandler = async (name) => {
     try {
       await updateMatrix([
-        { categories: [...data.categories, { name, weight: 1 }] },
+        { categories: [...data.categories, { name }] },
         matrixId,
       ]);
       toast.success(`Category Created: ${name}`);
@@ -48,7 +48,13 @@ const MatrixBuilder = ({ matrixId }) => {
         gap={1}
       >
         {data.categories.map((category) => (
-          <Button as={Tab} key={category.name} variant='ghost' p={6}>
+          <Button
+            as={Tab}
+            key={category.name}
+            variant='ghost'
+            p={6}
+            whiteSpace='normal'
+          >
             {category.name}
           </Button>
         ))}
