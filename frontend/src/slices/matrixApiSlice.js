@@ -16,18 +16,21 @@ export const matrixApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: data,
       }),
+      invalidatesTags: ['Matrix'],
     }),
     getMatrix: builder.query({
       query: (id) => ({
         url: `${MATRIX_URL}/${id}`,
         method: 'GET',
       }),
+      providesTags: ['Matrix'],
     }),
     getMatrices: builder.query({
       query: (queryParams) => ({
         url: `${MATRIX_URL}?${new URLSearchParams(queryParams).toString()}`,
         method: 'GET',
       }),
+      providesTags: ['Matrix'],
     }),
   }),
 });

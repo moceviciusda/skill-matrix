@@ -1,5 +1,8 @@
 import CompetenceCategory from './CompetenceCategory';
-import { useGetMatrixQuery } from '../../slices/matrixApiSlice';
+import {
+  useGetMatrixQuery,
+  useUpdateMatrixMutation,
+} from '../../slices/matrixApiSlice';
 import {
   TabList,
   Tabs,
@@ -8,9 +11,26 @@ import {
   TabPanel,
   Button,
 } from '@chakra-ui/react';
+import AddCategoryForm from './AddCategoryForm';
+import { toast } from 'react-toastify';
 
 const MatrixBuilder = ({ matrixId }) => {
   const { data, isLoading } = useGetMatrixQuery(matrixId);
+
+  const [updateMatrix] = useUpdateMatrixMutation();
+
+  const addCategoryHandler = async (name) => {
+    try {
+      await updateMatrix([
+        { categories: [...data.categories, { name, weight: 1 }] },
+        matrixId,
+      ]);
+      toast.success(`Category Created: ${name}`);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
   if (isLoading) return <></>;
 
   return (
@@ -28,13 +48,11 @@ const MatrixBuilder = ({ matrixId }) => {
         gap={1}
       >
         {data.categories.map((category) => (
-          <Button as={Tab} key={category.name} variant='ghost'>
+          <Button as={Tab} key={category.name} variant='ghost' p={6}>
             {category.name}
           </Button>
         ))}
-        <Button as={Tab} key='addCategory' variant='ghost'>
-          Add Category
-        </Button>
+        <AddCategoryForm addCategoryHandler={addCategoryHandler} />
       </TabList>
 
       <TabPanels>
@@ -46,7 +64,6 @@ const MatrixBuilder = ({ matrixId }) => {
             />
           </TabPanel>
         ))}
-        <TabPanel>Add category component</TabPanel>
       </TabPanels>
     </Tabs>
   );

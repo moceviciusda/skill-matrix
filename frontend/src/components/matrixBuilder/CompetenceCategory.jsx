@@ -65,8 +65,6 @@ const CompetenceCategory = ({ category }) => {
     }
   };
 
-  const editNameHandler = async () => {};
-
   const submitWeightHandler = async (e, competence) => {
     if (parseFloat(e.target.value) != competence.weight) {
       const updatedCompetenceList = competenceList.filter(

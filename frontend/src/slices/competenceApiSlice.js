@@ -15,6 +15,7 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
         url: `${COMPETENCES_URL}/${id}`,
         method: 'GET',
       }),
+      providesTags: ['Competence'],
     }),
     deleteCompetence: builder.mutation({
       query: (id) => ({
@@ -29,6 +30,7 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
         ).toString()}`,
         method: 'GET',
       }),
+      providesTags: ['Competence'],
     }),
     updateCompetence: builder.mutation({
       query: ([data, id]) => ({
@@ -36,6 +38,7 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: data,
       }),
+      invalidatesTags: ['Competence'],
     }),
     updateCompetenceLevels: builder.mutation({
       query: ([data, id]) => ({
@@ -43,6 +46,7 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: data,
       }),
+      invalidatesTags: ['Competence'],
     }),
   }),
 });

@@ -1,5 +1,8 @@
 import SkillGroup from './SkillGroup';
-import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
+import {
+  useGetCompetenceQuery,
+  useUpdateCompetenceMutation,
+} from '../../slices/competenceApiSlice';
 import { FaChevronDown, FaChevronUp, FaEdit } from 'react-icons/fa';
 import SetWeightButton from './SetWeightButton';
 import {
@@ -24,11 +27,13 @@ const Competence = ({
   submitWeightHandler,
 }) => {
   const { data, isLoading } = useGetCompetenceQuery(competence.competenceId);
+  const [updateCompetence] = useUpdateCompetenceMutation();
   const { isOpen, onToggle } = useDisclosure();
   const [editing, setEditing] = useState(false);
 
-  const editName = (e) => {
-    e.target.value !== data.name && console.log(e.target.value);
+  const updateName = (e) => {
+    e.target.value !== data.name &&
+      updateCompetence([{ name: e.target.value }, competence.competenceId]);
     setEditing(false);
   };
 
@@ -52,8 +57,8 @@ const Competence = ({
               _focusVisible={{ boxShadow: 'none', outline: 'none' }}
               autoFocus
               defaultValue={data.name}
-              onBlur={(e) => editName(e)}
-              onKeyUp={(e) => e.key === 'Enter' && editName(e)}
+              onBlur={(e) => updateName(e)}
+              onKeyUp={(e) => e.key === 'Enter' && updateName(e)}
             />
           ) : (
             <>
@@ -81,7 +86,10 @@ const Competence = ({
             icon={<IoClose size={20} />}
             isRound={true}
             variant='ghost'
-            onClick={() => removeCompetenceHandler(competence)}
+            onClick={(e) => {
+              e.stopPropagation();
+              removeCompetenceHandler(competence);
+            }}
           />
         </HStack>
       </Button>
