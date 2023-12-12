@@ -19,6 +19,7 @@ import RegisterScreen from './screens/RegisterScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen.jsx';
 import MatrixBuilderScreen from './screens/MatrixBuilderScreen.jsx';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import AssignmentsScreen from './screens/AssignmentsScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       {/* Private Routes*/}
       <Route path='' element={<PrivateRoute />}>
         <Route path='/profile' element={<ProfileScreen />} />
+        <Route path='/assignments' element={<AssignmentsScreen />} />
       </Route>
 
       {/* Admin Routes*/}

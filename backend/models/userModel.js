@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema(
       type: [userSkillSchema],
       default: [],
     },
+    assignments: {
+      type: [String],
+      default: [],
+    },
     group: {
       type: String,
       // required: true

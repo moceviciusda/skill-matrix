@@ -1,18 +1,21 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const skillSchema = mongoose.Schema({
+const skillSchema = mongoose.Schema(
+  {
     summary: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     description: {
-        type: String,
+      type: String,
     },
-}, {
-    timestamps: true
-})
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Skill = mongoose.model('Skill', skillSchema)
+const Skill = mongoose.model('Skill', skillSchema);
 
-export { Skill, skillSchema }
+export default Skill;

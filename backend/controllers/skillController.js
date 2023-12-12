@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import { Skill } from '../models/skillModel.js';
+import Skill from '../models/skillModel.js';
 
 // @desc    Create new skill
 // route    POST /api/skills

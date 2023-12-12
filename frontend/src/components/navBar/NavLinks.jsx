@@ -47,7 +47,7 @@ const NavLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
       >
         {userInfo && (
-          <NavItem to='/'>
+          <NavItem to='/assignments'>
             <FaTasks /> Assignments
           </NavItem>
         )}

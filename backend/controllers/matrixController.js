@@ -41,7 +41,7 @@ const getMatrices = asyncHandler(async (req, res) => {
   const matrices = await Matrix.find(req.query);
 
   if (matrices) {
-    res.status(201).json(matrices);
+    res.status(200).json(matrices);
   } else {
     res.status(400);
     throw new Error('No matrices');
@@ -61,7 +61,7 @@ const updateMatrix = asyncHandler(async (req, res) => {
 
     const updatedMatrix = await matrix.save();
 
-    res.status(200).json({
+    res.status(201).json({
       _id: updatedMatrix._id,
       name: updatedMatrix.name,
       categories: updatedMatrix.categories,
@@ -80,7 +80,7 @@ const getMatrix = asyncHandler(async (req, res) => {
   const matrix = await Matrix.findById(req.params.id);
 
   if (matrix) {
-    res.status(201).json(matrix);
+    res.status(200).json(matrix);
   } else {
     res.status(400);
     throw new Error('Matrix not found');

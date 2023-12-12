@@ -70,7 +70,7 @@ const logoutUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: 'User logged out' });
 });
 
-// @desc    Get user profile
+// @desc    Get logged in user profile
 // route    GET /api/users/profile
 // @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -78,9 +78,24 @@ const getUserProfile = asyncHandler(async (req, res) => {
     _id: req.user._id,
     name: req.user.name,
     email: req.user.email,
+    role: req.user.role,
   };
 
   res.status(200).json(user);
+});
+
+// @desc    Get user by id
+// route    GET /api/users/:id
+// @access  Private && admin
+const getUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(400);
+    throw new Error('User not found');
+  }
 });
 
 // @desc    Update user profile
@@ -111,10 +126,32 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update user by id
+// route    PUT /api/users/:id
+// @access  Private && Admin
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    for (let key in req.body) {
+      user[key] = req.body[key];
+    }
+
+    const updatedUser = await user.save();
+
+    res.status(201).json(updatedUser);
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
 export {
   authUser,
   registerUser,
   logoutUser,
   getUserProfile,
+  getUser,
   updateUserProfile,
+  updateUser,
 };

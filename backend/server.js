@@ -9,6 +9,7 @@ import userRoutes from './routes/userRoutes.js';
 import skillRoutes from './routes/skillRoutes.js';
 import competenceRoutes from './routes/competenceRoutes.js';
 import matrixRoutes from './routes/matrixRoutes.js';
+import assignmentRoutes from './routes/assignmentRoutes.js';
 
 connectDB();
 
@@ -23,6 +24,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/skills', skillRoutes);
 app.use('/api/competences', competenceRoutes);
 app.use('/api/matrix', matrixRoutes);
+app.use('/api/assignments', assignmentRoutes);
 
 app.get('/', (req, res) => {
   console.log(req);
