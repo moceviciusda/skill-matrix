@@ -24,7 +24,7 @@ const UserCard = ({ userId }) => {
   if (!data) return null;
 
   return (
-    <Card>
+    <Card variant='outline'>
       <CardHeader>
         <Flex gap='4' alignItems='center'>
           <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>

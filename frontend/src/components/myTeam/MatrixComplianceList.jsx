@@ -19,7 +19,7 @@ const MatrixComplianceList = ({ userSkills }) => {
         <MatrixComplianceListItem
           key={matrix._id}
           matrix={matrix}
-          userSkills={userSkills}
+          userSkills={userSkills.filter((skill) => skill.approvedBy)}
         />
       ))}
     </VStack>
