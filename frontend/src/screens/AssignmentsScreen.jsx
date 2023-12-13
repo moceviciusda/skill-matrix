@@ -17,7 +17,7 @@ const AssignmentsScreen = () => {
     });
 
   return (
-    <VStack bg='gray.100'>
+    <VStack>
       <Heading size='lg'>Assigned to me</Heading>
       <Wrap justify='center'>
         {!userAssLoading &&

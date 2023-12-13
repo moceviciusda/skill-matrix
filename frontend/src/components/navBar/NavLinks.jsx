@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Spacer, Stack } from '@chakra-ui/react';
+import { Box, Center, Divider, Stack } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -51,12 +51,12 @@ const NavLinks = ({ isOpen }) => {
             <FaTasks /> Assignments
           </NavItem>
         )}
-        {userInfo?.role === 'admin' && (
+        {['admin', 'manager'].includes(userInfo?.role) && (
           <>
             <NavItem to='/builder'>
               <BsGrid1X2 /> Matrix Builder
             </NavItem>
-            <NavItem to='/'>
+            <NavItem to='/team'>
               <RiTeamLine /> My Team
             </NavItem>
 
