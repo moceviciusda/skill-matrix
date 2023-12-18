@@ -8,11 +8,15 @@ const useAssignmentDetails = (assignment) => {
   const { data: assignedBy, isLoading: isAssignedByLoading } = useGetUserQuery(
     assignment.assignedBy
   );
+  const { data: assignee, isLoading: isAssigneeLoading } = useGetUserQuery(
+    assignment.assignee
+  );
 
   return {
     matrix,
     assignedBy,
-    isLoading: isMatrixLoading || isAssignedByLoading,
+    assignee,
+    isLoading: isMatrixLoading || isAssignedByLoading || isAssigneeLoading,
   };
 };
 

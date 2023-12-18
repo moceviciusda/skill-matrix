@@ -1,4 +1,3 @@
-import CompetenceCategory from './CompetenceCategory';
 import {
   useGetMatrixQuery,
   useUpdateMatrixMutation,
@@ -13,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import AddCategoryForm from './AddCategoryForm';
 import { toast } from 'react-toastify';
+import BuilderCompetenceCategory from './BuilderCompetenceCategory';
 
 const MatrixBuilder = ({ matrixId }) => {
   const { data, isLoading } = useGetMatrixQuery(matrixId);
@@ -64,7 +64,7 @@ const MatrixBuilder = ({ matrixId }) => {
       <TabPanels>
         {data.categories.map((category) => (
           <TabPanel key={category.name} p={0} pl={3}>
-            <CompetenceCategory
+            <BuilderCompetenceCategory
               category={category}
               categories={data.categories}
             />

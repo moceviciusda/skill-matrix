@@ -1,5 +1,15 @@
 import mongoose from 'mongoose';
 
+const assignmentSkillSchema = mongoose.Schema(
+  {
+    id: { type: String, required: true },
+    comments: { type: [String], default: [] },
+    assigneeChecked: { type: Boolean, default: false },
+    assignerChecked: { type: Boolean, default: false },
+  },
+  { _id: false }
+);
+
 const assignmentSchema = mongoose.Schema(
   {
     matrixId: {
@@ -22,8 +32,8 @@ const assignmentSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    skillsEarned: {
-      type: [String],
+    skills: {
+      type: [assignmentSkillSchema],
       default: [],
     },
   },

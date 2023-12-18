@@ -1,4 +1,4 @@
-import { Box, Center, Divider, Stack } from '@chakra-ui/react';
+import { Avatar, Box, Center, Divider, Stack } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -71,7 +71,7 @@ const NavLinks = ({ isOpen }) => {
         {userInfo ? (
           <>
             <NavItem to='/profile'>
-              <CgProfile /> {userInfo.name}
+              <Avatar size='sm' name={userInfo.name} /> {userInfo.name}
             </NavItem>
             <NavItem onClick={logoutHandler}>
               <FaSignOutAlt /> Logout

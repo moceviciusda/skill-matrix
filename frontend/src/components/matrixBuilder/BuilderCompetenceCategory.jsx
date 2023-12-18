@@ -1,4 +1,4 @@
-import Competence from './Competence';
+import BuilderCompetence from './BuilderCompetence';
 import { useState } from 'react';
 import {
   useGetMatrixQuery,
@@ -10,7 +10,7 @@ import { VStack } from '@chakra-ui/react';
 import AddCompetenceForm from './AddCompetenceForm';
 import { useDeleteCompetenceMutation } from '../../slices/competenceApiSlice';
 
-const CompetenceCategory = ({ category }) => {
+const BuilderCompetenceCategory = ({ category }) => {
   const [competenceList, setCompetenceList] = useState(category.competences);
 
   const { id } = useParams();
@@ -94,12 +94,12 @@ const CompetenceCategory = ({ category }) => {
   return (
     <VStack>
       {competenceList.map((competence) => (
-        <Competence
+        <BuilderCompetence
           key={competence.competenceId}
           competence={competence}
           removeCompetenceHandler={removeCompetenceHandler}
           submitWeightHandler={submitWeightHandler}
-        ></Competence>
+        ></BuilderCompetence>
       ))}
 
       <AddCompetenceForm addCompetenceHandler={addCompetenceHandler} />
@@ -107,4 +107,4 @@ const CompetenceCategory = ({ category }) => {
   );
 };
 
-export default CompetenceCategory;
+export default BuilderCompetenceCategory;

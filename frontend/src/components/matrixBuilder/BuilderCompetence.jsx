@@ -1,4 +1,4 @@
-import SkillGroup from './SkillGroup';
+import BuilderSkillGroup from './BuilderSkillGroup';
 import {
   useGetCompetenceQuery,
   useUpdateCompetenceMutation,
@@ -21,7 +21,7 @@ import {
 import { IoClose } from 'react-icons/io5';
 import { useState } from 'react';
 
-const Competence = ({
+const BuilderCompetence = ({
   competence,
   removeCompetenceHandler,
   submitWeightHandler,
@@ -93,25 +93,25 @@ const Competence = ({
           />
         </HStack>
       </Button>
-      <CardBody p={0}>
-        <Box as={Collapse} in={!isOpen} animateOpacity p={2}>
-          <HStack alignItems='flex-start' flexWrap='wrap'>
-            {Object.keys(data.levels).map(
-              (level) =>
-                level !== '_id' && (
-                  <SkillGroup
-                    competenceId={data._id}
-                    key={data._id + level}
-                    skills={data.levels[level]}
-                    title={level}
-                  />
-                )
-            )}
-          </HStack>
-        </Box>
-      </CardBody>
+      {/* <CardBody p={0}> */}
+      <Box as={Collapse} in={!isOpen} animateOpacity p={2}>
+        <HStack alignItems='flex-start' flexWrap='wrap'>
+          {Object.keys(data.levels).map(
+            (level) =>
+              level !== '_id' && (
+                <BuilderSkillGroup
+                  competenceId={data._id}
+                  key={data._id + level}
+                  skills={data.levels[level]}
+                  title={level}
+                />
+              )
+          )}
+        </HStack>
+      </Box>
+      {/* </CardBody> */}
     </Card>
   );
 };
 
-export default Competence;
+export default BuilderCompetence;

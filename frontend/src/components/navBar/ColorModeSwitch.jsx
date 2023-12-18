@@ -7,7 +7,9 @@ const ColorModeSwitch = ({ variant = 'ghost' }) => {
 
   return (
     <Button
-      as='span'
+      as='label'
+      cursor='pointer'
+      htmlFor='color-mode-switch'
       sx={{
         display: 'flex',
         flexWrap: 'nowrap',
@@ -15,9 +17,9 @@ const ColorModeSwitch = ({ variant = 'ghost' }) => {
         gap: '4px',
       }}
       variant={variant}
-      // onClick={toggleColorMode}
     >
       <Switch
+        id='color-mode-switch'
         colorScheme='purple'
         isChecked={colorMode === 'dark'}
         onChange={(e) => {
@@ -25,7 +27,7 @@ const ColorModeSwitch = ({ variant = 'ghost' }) => {
           toggleColorMode();
         }}
       />
-      Dark Mode
+      <Text>Dark Mode</Text>
     </Button>
   );
 };

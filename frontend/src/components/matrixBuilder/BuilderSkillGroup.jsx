@@ -15,7 +15,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-const SkillGroup = ({ competenceId, skills, title }) => {
+const BuilderSkillGroup = ({ competenceId, skills, title }) => {
   const [skillsState, setSkillsState] = useState(skills);
 
   const [updateCompetenceLevels] = useUpdateCompetenceLevelsMutation();
@@ -120,4 +120,4 @@ const SkillGroup = ({ competenceId, skills, title }) => {
   );
 };
 
-export default SkillGroup;
+export default BuilderSkillGroup;

@@ -41,14 +41,14 @@ const SetWeightButton = ({ onSubmit, obj }) => {
               setShowWeightForm(true);
             }}
             variant='ghost'
-            borderRadius='2em'
+            borderRadius='full'
             // colorScheme='purple'
           >
             {obj.weight}
           </Button>
         ) : (
           <NumberInput
-            size='xs'
+            size='sm'
             defaultValue={obj.weight}
             min={0}
             max={9999}

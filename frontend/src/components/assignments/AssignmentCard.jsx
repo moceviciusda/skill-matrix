@@ -9,6 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import useAssignmentDetails from '../../hooks/useAssignmentDetails';
+import NavItem from '../navBar/NavItem';
 
 const AssignmentCard = ({ assignment }) => {
   const { matrix, assignedBy, isLoading } = useAssignmentDetails(assignment);
@@ -18,7 +19,7 @@ const AssignmentCard = ({ assignment }) => {
   if (!matrix) return <>no matrix</>;
 
   return (
-    <Card>
+    <Card size='sm'>
       <CardHeader>
         <Heading size='md' textTransform='capitalize'>
           {matrix.name}
@@ -32,7 +33,7 @@ const AssignmentCard = ({ assignment }) => {
       </CardBody>
 
       <CardFooter>
-        <Button>do</Button>
+        <NavItem to={`/assignments/${assignment._id}`}>do</NavItem>
         <Button>submit</Button>
       </CardFooter>
     </Card>

@@ -24,7 +24,7 @@ const UserCard = ({ userId }) => {
   if (!data) return null;
 
   return (
-    <Card variant='outline'>
+    <Card variant='outline' size='sm'>
       <CardHeader>
         <Flex gap='4' alignItems='center'>
           <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
@@ -34,6 +34,10 @@ const UserCard = ({ userId }) => {
               <Text>{data?.role}</Text>
             </Box>
           </Flex>
+          <ButtonGroup flexWrap='wrap' variant='ghost'>
+            <Button>View Skills</Button>
+            <Button>Grow Plan</Button>
+          </ButtonGroup>
         </Flex>
       </CardHeader>
 
@@ -41,13 +45,7 @@ const UserCard = ({ userId }) => {
         <MatrixComplianceList userSkills={data.skills} />
       </CardBody>
 
-      <CardFooter>
-        <ButtonGroup flexWrap='wrap'>
-          <Button>New Assignment</Button>
-          <Button>View Skills</Button>
-          <Button>Grow Plan</Button>
-        </ButtonGroup>
-      </CardFooter>
+      {/* <CardFooter></CardFooter> */}
     </Card>
   );
 };
