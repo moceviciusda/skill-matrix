@@ -20,8 +20,21 @@ const MatrixAssessmentView = ({ matrixId }) => {
 
   return (
     <>
-      <Progress size='lg' minW='80%' borderRadius={10} value={totalProgress} />
+      <Progress size='lg' borderRadius='full' value={50} hasStripe isAnimated />
 
+      <Progress
+        borderRadius='full'
+        variant='multiSegment'
+        isIndeterminate
+        m={4}
+        height={8}
+        min={0}
+        max={100}
+        values={{
+          green: 65,
+          yellow: 15,
+        }}
+      />
       <Tabs
         orientation='vertical'
         variant='soft-rounded'

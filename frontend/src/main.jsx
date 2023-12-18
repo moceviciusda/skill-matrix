@@ -9,7 +9,7 @@ import {
 import store from './store.js';
 import { Provider } from 'react-redux';
 import App from './App.jsx';
-import theme from './theme.js';
+import theme from './theme/theme.js';
 import './index.css';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import AdminRoute from './components/AdminRoute.jsx';

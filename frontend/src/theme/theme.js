@@ -1,4 +1,6 @@
 import { extendTheme } from '@chakra-ui/react';
+import { ProgressTheme } from './Progress';
+import { SwitchTheme } from './Switch';
 
 const styles = {
   global: {
@@ -10,6 +12,8 @@ const styles = {
 
 const config = { initialColorMode: 'dark' };
 
-const theme = extendTheme({ config, styles });
+const components = { ...ProgressTheme.components, ...SwitchTheme.components };
+
+const theme = extendTheme({ config, styles, components });
 
 export default theme;

@@ -69,12 +69,12 @@ const Skill = ({ skill }) => {
 
   let colors = '';
   if (assignmentSkill.assigneeChecked && assignmentSkill.assignerChecked) {
-    colors = useColorModeValue('green.100', 'green.800');
+    colors = useColorModeValue('green.100', 'green.700');
   } else if (
     assignmentSkill.assigneeChecked ||
     assignmentSkill.assignerChecked
   ) {
-    colors = useColorModeValue('yellow.100', 'yellow.800');
+    colors = useColorModeValue('yellow.100', 'yellow.700');
   }
 
   if (skillLoading) return <></>;
