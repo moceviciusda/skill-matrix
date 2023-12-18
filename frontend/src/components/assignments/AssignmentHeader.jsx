@@ -22,25 +22,25 @@ const AssignmentHeader = ({ assignment }) => {
   return (
     // <VStack>
     <Wrap spacing={12} pb={6}>
-      <Heading>{matrix.name}</Heading>
+      <Heading>{matrix?.name}</Heading>
 
       {/* <Spacer /> */}
 
       <Flex gap='2' alignItems='center' flexWrap='wrap' justify='flex-end'>
         <Heading size='md'>Assigned By:</Heading>
-        <Avatar name={assignedBy.name} />
+        <Avatar name={assignedBy?.name} />
         <Box>
-          <Heading size='sm'>{assignedBy.name}</Heading>
-          <Text>{assignedBy.role}</Text>
+          <Heading size='sm'>{assignedBy?.name}</Heading>
+          <Text>{assignedBy?.role}</Text>
         </Box>
       </Flex>
 
       <Flex gap='2' alignItems='center' flexWrap='wrap' justify='flex-end'>
         <Heading size='md'>Assignee:</Heading>
-        <Avatar name={assignee.name} />
+        <Avatar name={assignee?.name} />
         <Box>
-          <Heading size='sm'>{assignee.name}</Heading>
-          <Text>{assignee.role}</Text>
+          <Heading size='sm'>{assignee?.name}</Heading>
+          <Text>{assignee?.role}</Text>
         </Box>
       </Flex>
     </Wrap>

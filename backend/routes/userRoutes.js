@@ -20,7 +20,7 @@ router
   .put(protect, updateUserProfile);
 router
   .route('/:id')
-  .get(protect, validateRole, getUser)
+  .get(protect, getUser)
   .put(protect, validateRole, updateUser);
 
 export default router;

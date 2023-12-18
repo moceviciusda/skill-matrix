@@ -5,6 +5,7 @@ import {
   HStack,
   Text,
   Spacer,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { FaInfoCircle } from 'react-icons/fa';
 import { useGetSkillQuery } from '../../slices/skillsApiSlice';
@@ -66,6 +67,16 @@ const Skill = ({ skill }) => {
     }
   };
 
+  let colors = '';
+  if (assignmentSkill.assigneeChecked && assignmentSkill.assignerChecked) {
+    colors = useColorModeValue('green.100', 'green.800');
+  } else if (
+    assignmentSkill.assigneeChecked ||
+    assignmentSkill.assignerChecked
+  ) {
+    colors = useColorModeValue('yellow.100', 'yellow.800');
+  }
+
   if (skillLoading) return <></>;
 
   return (
@@ -74,7 +85,7 @@ const Skill = ({ skill }) => {
       variant='outline'
       width='100%'
       cursor='pointer'
-      // bg='green.100'
+      bg={colors}
       htmlFor={userInfo._id + skill.skillId}
     >
       <CardHeader paddingX={2} pt={2} pb={0}>
