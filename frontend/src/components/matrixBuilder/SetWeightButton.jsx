@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { FaWeightHanging } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-const SetWeightButton = ({ onSubmit, obj }) => {
+const SetWeightButton = ({ onSubmit, obj, body = '', header = 'Weight' }) => {
   const [showWeightForm, setShowWeightForm] = useState(false);
 
   const submitWeight = (e) => {
@@ -72,13 +72,8 @@ const SetWeightButton = ({ onSubmit, obj }) => {
       </PopoverTrigger>
       <Portal>
         <PopoverContent>
-          <PopoverHeader>Skill Weight: {obj.weight}</PopoverHeader>
-          <PopoverBody>
-            Used to determine importance of skill within level.
-            <br /> Competence level completion percentage is a ratio of {'('}
-            weight sum of acquired skills{')'} / {'('}weight sum of skills
-            within level{')'}
-          </PopoverBody>
+          <PopoverHeader>{`${header}: ${obj.weight}`}</PopoverHeader>
+          <PopoverBody>{body}</PopoverBody>
         </PopoverContent>
       </Portal>
     </Popover>

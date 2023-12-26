@@ -13,7 +13,6 @@ import {
   Collapse,
   HStack,
   Card,
-  CardBody,
   Spacer,
   IconButton,
   Input,
@@ -37,7 +36,7 @@ const BuilderCompetence = ({
     setEditing(false);
   };
 
-  if (isLoading) return <></>;
+  if (isLoading || !data) return <></>;
 
   return (
     <Card w='100%'>
@@ -81,6 +80,10 @@ const BuilderCompetence = ({
             size={20}
             onSubmit={submitWeightHandler}
             obj={competence}
+            header='Competence Weight'
+            body='Used to determine importance of competence within matrix category. 
+            Category completion percentage is a ratio of 
+            (competence completion ratio * competence weight) / (weight sum of all competences within category)'
           />
           <IconButton
             icon={<IoClose size={20} />}
@@ -93,23 +96,15 @@ const BuilderCompetence = ({
           />
         </HStack>
       </Button>
-      {/* <CardBody p={0}> */}
+
       <Box as={Collapse} in={!isOpen} animateOpacity p={2}>
-        <HStack alignItems='flex-start' flexWrap='wrap'>
-          {Object.keys(data.levels).map(
-            (level) =>
-              level !== '_id' && (
-                <BuilderSkillGroup
-                  competenceId={data._id}
-                  key={data._id + level}
-                  skills={data.levels[level]}
-                  title={level}
-                />
-              )
-          )}
-        </HStack>
+        <BuilderSkillGroup
+          competenceId={data._id}
+          key={data._id}
+          skills={data.skills}
+          title={'random'}
+        />
       </Box>
-      {/* </CardBody> */}
     </Card>
   );
 };

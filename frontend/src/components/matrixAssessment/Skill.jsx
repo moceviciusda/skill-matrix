@@ -67,14 +67,16 @@ const Skill = ({ skill }) => {
     }
   };
 
+  const successColors = useColorModeValue('green.100', 'green.700');
+  const mismatchColors = useColorModeValue('yellow.100', 'yellow.700');
   let colors = '';
   if (assignmentSkill.assigneeChecked && assignmentSkill.assignerChecked) {
-    colors = useColorModeValue('green.100', 'green.700');
+    colors = successColors;
   } else if (
     assignmentSkill.assigneeChecked ||
     assignmentSkill.assignerChecked
   ) {
-    colors = useColorModeValue('yellow.100', 'yellow.700');
+    colors = mismatchColors;
   }
 
   if (skillLoading) return <></>;

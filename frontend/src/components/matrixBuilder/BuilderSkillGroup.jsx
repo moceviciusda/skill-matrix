@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { FaWeightHanging } from 'react-icons/fa';
 import BuilderSkill from './BuilderSkill';
 import AddSkillForm from './AddSkillForm';
-import { useUpdateCompetenceLevelsMutation } from '../../slices/competenceApiSlice';
+import {
+  useUpdateCompetenceLevelsMutation,
+  useUpdateCompetenceMutation,
+} from '../../slices/competenceApiSlice';
 import { toast } from 'react-toastify';
 import {
   Box,
@@ -18,17 +21,14 @@ import {
 const BuilderSkillGroup = ({ competenceId, skills, title }) => {
   const [skillsState, setSkillsState] = useState(skills);
 
-  const [updateCompetenceLevels] = useUpdateCompetenceLevelsMutation();
+  const [updateCompetence] = useUpdateCompetenceMutation();
 
   const { isOpen, onToggle } = useDisclosure();
 
   const removeSkillHandler = async (skillId) => {
     const newSkills = skillsState.filter((skill) => skill.skillId !== skillId);
     try {
-      await updateCompetenceLevels([
-        { [title]: newSkills },
-        competenceId,
-      ]).unwrap();
+      await updateCompetence([{ skills: newSkills }, competenceId]).unwrap();
       toast.success(`Skill removed`);
       setSkillsState(newSkills);
     } catch (err) {
@@ -47,12 +47,12 @@ const BuilderSkillGroup = ({ competenceId, skills, title }) => {
       );
 
       try {
-        const res = await updateCompetenceLevels([
-          { [title]: body },
+        const res = await updateCompetence([
+          { skills: body },
           competenceId,
         ]).unwrap();
         toast.success(`Skill weight set to: ${e.target.value}`);
-        setSkillsState([...res.levels[title]]);
+        setSkillsState([...res.skills]);
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }

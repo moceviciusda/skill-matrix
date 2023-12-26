@@ -9,11 +9,9 @@ import {
   FaSignInAlt,
   FaSignOutAlt,
   FaRegistered,
-  FaListUl,
   FaTasks,
 } from 'react-icons/fa';
 import { BsGrid1X2 } from 'react-icons/bs';
-import { CgProfile } from 'react-icons/cg';
 import { RiTeamLine } from 'react-icons/ri';
 
 const NavLinks = ({ isOpen }) => {
@@ -44,6 +42,7 @@ const NavLinks = ({ isOpen }) => {
         align='center'
         justify={['center', 'space-between', 'flex-end', 'flex-end']}
         direction={['column', 'column', 'row', 'row']}
+        flexWrap={'wrap'}
         pt={[4, 4, 0, 0]}
       >
         {userInfo && (

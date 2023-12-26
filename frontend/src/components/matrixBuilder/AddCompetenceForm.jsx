@@ -22,7 +22,6 @@ const AddCompetenceForm = ({ addCompetenceHandler }) => {
       try {
         const competence = await createCompetence({
           name: e.target.value,
-          levels: { beginner: [], advanced: [], proficient: [], expert: [] },
         }).unwrap();
         toast.success(`Competence Created: ${competence.name}`);
         await addCompetenceHandler(competence._id);

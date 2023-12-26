@@ -1,6 +1,5 @@
 import {
   Card,
-  CardBody,
   Button,
   HStack,
   Text,
@@ -9,10 +8,8 @@ import {
   Spacer,
   useDisclosure,
 } from '@chakra-ui/react';
-import BuilderSkillGroup from '../matrixBuilder/BuilderSkillGroup';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
-import SetWeightButton from '../matrixBuilder/SetWeightButton';
 import SkillGroup from './SkillGroup';
 import WeightTag from './WeightTag';
 
@@ -21,7 +18,7 @@ const Competence = ({ competence }) => {
 
   const { data, isLoading } = useGetCompetenceQuery(competence.competenceId);
 
-  if (isLoading) return <>Loading...</>;
+  if (isLoading || !data) return <>Loading...</>;
 
   return (
     <Card w='100%'>
@@ -43,19 +40,11 @@ const Competence = ({ competence }) => {
       </Button>
 
       <Box as={Collapse} in={!isOpen} animateOpacity p={2}>
-        <HStack alignItems='flex-start' flexWrap='wrap'>
-          {Object.keys(data.levels).map(
-            (level) =>
-              level !== '_id' && (
-                <SkillGroup
-                  competenceId={data._id}
-                  key={data._id + level}
-                  skills={data.levels[level]}
-                  title={level}
-                />
-              )
-          )}
-        </HStack>
+        <SkillGroup
+          competenceId={data._id}
+          key={data._id}
+          skills={data.skills}
+        />
       </Box>
     </Card>
   );

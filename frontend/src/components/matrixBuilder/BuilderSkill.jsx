@@ -19,12 +19,12 @@ const BuilderSkill = ({ skill, removeSkillHandler, submitWeightHandler }) => {
   if (isLoading) return <></>;
 
   return (
-    <Card variant='outline' width='100%'>
+    <Card variant='outline' width='100%' height='100%' justify='flex-end'>
       <CardHeader paddingX={2} pt={2} pb={0}>
         <Text>{data.summary}</Text>
       </CardHeader>
-      <CardBody p={1}>
-        <HStack justify='flex-end' gap='2px'>
+      <CardBody p={1} display='flex'>
+        <HStack justify='flex-end' gap='2px' flexGrow='1' align='flex-end'>
           <IconButton
             icon={<FaEdit />}
             isRound={true}
@@ -42,7 +42,14 @@ const BuilderSkill = ({ skill, removeSkillHandler, submitWeightHandler }) => {
 
           <Spacer />
 
-          <SetWeightButton onSubmit={submitWeightHandler} obj={skill} />
+          <SetWeightButton
+            onSubmit={submitWeightHandler}
+            obj={skill}
+            header='Skill Weight'
+            body='Used to determine importance of skill within competence. 
+            Competence completion percentage is a ratio of 
+            (weight sum of acquired skills) / (weight sum of all competence skills)'
+          />
           <InfoHoverIcon
             icon={<FaInfoCircle />}
             header='Skill Description'

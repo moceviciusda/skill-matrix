@@ -21,18 +21,9 @@ const competenceSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    type: {
-      type: String,
-    },
-    category: {
-      type: String,
-    },
-    levels: {
-      beginner: [competenceSkillSchema],
-      advanced: [competenceSkillSchema],
-      proficient: [competenceSkillSchema],
-      expert: [competenceSkillSchema],
-      _id: false,
+    skills: {
+      type: [competenceSkillSchema],
+      default: [],
     },
   },
   {

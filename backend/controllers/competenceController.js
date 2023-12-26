@@ -80,9 +80,7 @@ const updateCompetence = asyncHandler(async (req, res) => {
     res.status(200).json({
       _id: updatedCompetence._id,
       name: updatedCompetence.name,
-      type: updatedCompetence.type,
-      category: updatedCompetence.category,
-      levels: updatedCompetence.levels,
+      skills: updatedCompetence.skills,
     });
   } else {
     res.status(404);

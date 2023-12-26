@@ -3,7 +3,7 @@ import {
   useCreateSkillMutation,
   useGetSkillsQuery,
 } from '../../slices/skillsApiSlice';
-import { useUpdateCompetenceLevelsMutation } from '../../slices/competenceApiSlice';
+import { useUpdateCompetenceMutation } from '../../slices/competenceApiSlice';
 import { toast } from 'react-toastify';
 import {
   Card,
@@ -34,7 +34,7 @@ const AddSkillForm = ({
 
   const [createSkill, createSkillObj] = useCreateSkillMutation();
   const { data = [], isLoading } = useGetSkillsQuery();
-  const [updateCompetenceLevels] = useUpdateCompetenceLevelsMutation();
+  const [updateCompetence] = useUpdateCompetenceMutation();
 
   const selectAutoCompleteHandler = (skill) => {
     setSummary(skill.summary);
@@ -52,8 +52,8 @@ const AddSkillForm = ({
       const skillReference = { weight: 1, skillId: skill._id };
 
       stateChanger([...skills, skillReference]);
-      await updateCompetenceLevels([
-        { [title]: [...skills, skillReference] },
+      await updateCompetence([
+        { skills: [...skills, skillReference] },
         competenceId,
       ]).unwrap();
 

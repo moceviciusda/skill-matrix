@@ -3,12 +3,17 @@ import {
   useUpdateMatrixMutation,
 } from '../../slices/matrixApiSlice';
 import {
+  Card,
+  CardHeader,
+  CardBody,
   TabList,
   Tabs,
   Tab,
   TabPanels,
   TabPanel,
   Button,
+  Flex,
+  Heading,
 } from '@chakra-ui/react';
 import AddCategoryForm from './AddCategoryForm';
 import { toast } from 'react-toastify';
@@ -34,44 +39,55 @@ const MatrixBuilder = ({ matrixId }) => {
   if (isLoading) return <></>;
 
   return (
-    <Tabs
-      orientation='vertical'
-      variant='soft-rounded'
-      colorScheme='purple'
-      p='12px'
-    >
-      <TabList
-        position='sticky'
-        top='12px'
-        alignSelf='flex-start'
-        minW='200px'
-        gap={1}
-      >
-        {data.categories.map((category) => (
-          <Button
-            as={Tab}
-            key={category.name}
-            variant='ghost'
-            p={6}
-            whiteSpace='normal'
-          >
-            {category.name}
-          </Button>
-        ))}
-        <AddCategoryForm addCategoryHandler={addCategoryHandler} />
-      </TabList>
+    <Flex justify='center'>
+      <Card size='lg' flexBasis={{ base: '100%', xl: '80%' }}>
+        <CardHeader>
+          <Heading>{data.name}</Heading>
+        </CardHeader>
 
-      <TabPanels>
-        {data.categories.map((category) => (
-          <TabPanel key={category.name} p={0} pl={3}>
-            <BuilderCompetenceCategory
-              category={category}
-              categories={data.categories}
-            />
-          </TabPanel>
-        ))}
-      </TabPanels>
-    </Tabs>
+        <CardBody p={0}>
+          <Tabs
+            orientation='vertical'
+            variant='soft-rounded'
+            colorScheme='purple'
+            p='12px'
+            flexBasis={{ base: '100%', xl: '80%' }}
+          >
+            <TabList
+              position='sticky'
+              top='12px'
+              alignSelf='flex-start'
+              minW='200px'
+              gap={1}
+            >
+              {data.categories.map((category) => (
+                <Button
+                  as={Tab}
+                  key={category.name}
+                  variant='ghost'
+                  p={6}
+                  whiteSpace='normal'
+                >
+                  {category.name}
+                </Button>
+              ))}
+              <AddCategoryForm addCategoryHandler={addCategoryHandler} />
+            </TabList>
+
+            <TabPanels>
+              {data.categories.map((category) => (
+                <TabPanel key={category.name} p={0} pl={3}>
+                  <BuilderCompetenceCategory
+                    category={category}
+                    categories={data.categories}
+                  />
+                </TabPanel>
+              ))}
+            </TabPanels>
+          </Tabs>
+        </CardBody>
+      </Card>
+    </Flex>
   );
 };
 

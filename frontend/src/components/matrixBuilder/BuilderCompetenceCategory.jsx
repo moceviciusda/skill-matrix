@@ -6,7 +6,7 @@ import {
 } from '../../slices/matrixApiSlice';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { VStack } from '@chakra-ui/react';
+import { Wrap, WrapItem } from '@chakra-ui/react';
 import AddCompetenceForm from './AddCompetenceForm';
 import { useDeleteCompetenceMutation } from '../../slices/competenceApiSlice';
 
@@ -41,10 +41,10 @@ const BuilderCompetenceCategory = ({ category }) => {
 
     try {
       await updateMatrix([body, id]).unwrap();
-      await deleteCompetence(competence.competenceId);
 
       setCompetenceList(updatedCategory.competences);
       toast.success(`Competence removed`);
+      deleteCompetence(competence.competenceId);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -92,18 +92,23 @@ const BuilderCompetenceCategory = ({ category }) => {
   };
 
   return (
-    <VStack>
+    <Wrap>
       {competenceList.map((competence) => (
-        <BuilderCompetence
+        <WrapItem
           key={competence.competenceId}
-          competence={competence}
-          removeCompetenceHandler={removeCompetenceHandler}
-          submitWeightHandler={submitWeightHandler}
-        ></BuilderCompetence>
+          flex={1}
+          minW={{ base: '300px', md: '400px' }}
+        >
+          <BuilderCompetence
+            competence={competence}
+            removeCompetenceHandler={removeCompetenceHandler}
+            submitWeightHandler={submitWeightHandler}
+          />
+        </WrapItem>
       ))}
 
       <AddCompetenceForm addCompetenceHandler={addCompetenceHandler} />
-    </VStack>
+    </Wrap>
   );
 };
 

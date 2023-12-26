@@ -1,13 +1,19 @@
-import { VStack } from '@chakra-ui/react';
+import { VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import Competence from './Competence';
 
 const CompetenceCategory = ({ category }) => {
   return (
-    <VStack>
+    <Wrap justify='center'>
       {category.competences.map((competence) => (
-        <Competence key={competence.competenceId} competence={competence} />
+        <WrapItem
+          key={competence.competenceId}
+          flex={1}
+          minW={{ base: '300px', md: '400px' }}
+        >
+          <Competence competence={competence} />
+        </WrapItem>
       ))}
-    </VStack>
+    </Wrap>
   );
 };
 

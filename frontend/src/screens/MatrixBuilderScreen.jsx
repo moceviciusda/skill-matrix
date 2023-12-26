@@ -3,6 +3,7 @@ import MatrixBuilder from '../components/matrixBuilder/MatrixBuilder';
 import { useGetMatricesQuery } from '../slices/matrixApiSlice';
 import { useSelector } from 'react-redux';
 import NavItem from '../components/navBar/NavItem';
+import { Button } from '@chakra-ui/react';
 
 const MatrixBuilderScreen = () => {
   const { id } = useParams();
@@ -21,6 +22,9 @@ const MatrixBuilderScreen = () => {
             <NavItem to={`/builder/${matrix._id}`}>{matrix.name}</NavItem>
           </li>
         ))}
+        <li>
+          <Button></Button>
+        </li>
       </ul>
     );
 };
