@@ -21,7 +21,7 @@ const AssignmentHeader = ({ assignment }) => {
 
   return (
     // <VStack>
-    <Wrap spacing={12} pb={6}>
+    <Wrap spacing={12}>
       <Heading>{matrix?.name}</Heading>
 
       {/* <Spacer /> */}

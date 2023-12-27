@@ -1,4 +1,12 @@
-import { Button, Tab, VStack, Text, Progress } from '@chakra-ui/react';
+import {
+  Button,
+  Tab,
+  VStack,
+  Text,
+  Progress,
+  HStack,
+  Heading,
+} from '@chakra-ui/react';
 
 import useCategoryProgress from '../../hooks/useCategoryProgress';
 
@@ -11,7 +19,9 @@ const MatrixTab = ({ category, assignmentData }) => {
   return (
     <Button as={Tab} variant='ghost' size='xl' whiteSpace='normal'>
       <VStack flex={1}>
-        <Text>{category.name}</Text>
+        <Heading size='sm' textTransform='capitalize'>
+          {category.name}
+        </Heading>
         <Progress
           size='lg'
           variant='multiSegment'
@@ -24,9 +34,10 @@ const MatrixTab = ({ category, assignmentData }) => {
           borderRadius='full'
           w='100%'
         />
-        <Text>
-          {fullCheckProgress * 100} % {singleCheckProgress * 100} %{' '}
-        </Text>
+        <HStack justify='space-around' width='100%'>
+          <Text>{+(fullCheckProgress * 100).toFixed(1)}%</Text>
+          <Text>{+(singleCheckProgress * 100).toFixed(1)}%</Text>
+        </HStack>
       </VStack>
     </Button>
   );

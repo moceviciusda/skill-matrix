@@ -7,14 +7,26 @@ import {
   Collapse,
   Spacer,
   useDisclosure,
+  Progress,
 } from '@chakra-ui/react';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { useGetCompetenceQuery } from '../../slices/competenceApiSlice';
 import SkillGroup from './SkillGroup';
 import WeightTag from './WeightTag';
+import { useParams } from 'react-router-dom';
+import { useGetAssignmentQuery } from '../../slices/assignmentsAPISlice';
+import useCompetenceProgress from '../../hooks/useCompetenceProgress';
 
 const Competence = ({ competence }) => {
   const { isOpen, onToggle } = useDisclosure();
+
+  const { id: assignmentId } = useParams();
+  const { data: assignmentData } = useGetAssignmentQuery(assignmentId);
+
+  const { singleCheckProgress, fullCheckProgress } = useCompetenceProgress(
+    competence.competenceId,
+    assignmentData
+  );
 
   const { data, isLoading } = useGetCompetenceQuery(competence.competenceId);
 
@@ -32,8 +44,20 @@ const Competence = ({ competence }) => {
         borderBottomRadius={!isOpen ? 0 : 6}
         rightIcon={!isOpen ? <FaChevronUp /> : <FaChevronDown />}
       >
-        <HStack flex='1'>
+        <HStack flex='1' alignItems='center'>
           <Text textTransform='capitalize'>{data.name}</Text>
+          {/* <Progress
+            size='lg'
+            variant='multiSegment'
+            min={0}
+            max={100}
+            values={{
+              green: fullCheckProgress * 100,
+              yellow: (singleCheckProgress - fullCheckProgress) * 100,
+            }}
+            borderRadius='full'
+            flex={1}
+          /> */}
           <Spacer />
           <WeightTag weight={competence.weight} header='Competence Weight' />
         </HStack>

@@ -23,8 +23,8 @@ const useCompetenceProgress = (competenceId, assignmentData) => {
   }, 0);
 
   return {
-    singleCheckProgress: singleCheckWeight / totalWeight,
-    fullCheckProgress: fullCheckWeight / totalWeight,
+    singleCheckProgress: singleCheckWeight / totalWeight || 0,
+    fullCheckProgress: fullCheckWeight / totalWeight || 0,
     isLoading,
   };
 };
