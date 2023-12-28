@@ -87,4 +87,27 @@ const getMatrix = asyncHandler(async (req, res) => {
   }
 });
 
-export { createMatrix, getMatrices, updateMatrix, getMatrix };
+// @desc    Delete matrix by id
+// route    DELETE /api/matrix/:id
+// @access  Private && Admin
+const deleteMatrix = asyncHandler(async (req, res) => {
+  const matrix = await Matrix.findById(req.params.id);
+
+  if (matrix) {
+    console.log(req.user._id);
+    console.log(matrix.ownerId);
+    if (req.user._id.equals(matrix.ownerId)) {
+      Matrix.deleteOne({ _id: matrix._id }).then(() => {
+        res.status(204).json({ message: 'Matrix deleted successfully' });
+      });
+    } else {
+      res.status(401);
+      throw new Error('Not authorized, matrix owned by another user');
+    }
+  } else {
+    res.status(400);
+    throw new Error('Matrix not found');
+  }
+});
+
+export { createMatrix, getMatrices, updateMatrix, getMatrix, deleteMatrix };

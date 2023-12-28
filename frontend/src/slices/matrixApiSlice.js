@@ -9,12 +9,20 @@ export const matrixApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Matrix'],
     }),
     updateMatrix: builder.mutation({
       query: ([data, id]) => ({
         url: `${MATRIX_URL}/${id}`,
         method: 'PUT',
         body: data,
+      }),
+      invalidatesTags: ['Matrix'],
+    }),
+    deleteMatrix: builder.mutation({
+      query: (id) => ({
+        url: `${MATRIX_URL}/${id}`,
+        method: 'DELETE',
       }),
       invalidatesTags: ['Matrix'],
     }),
@@ -39,5 +47,6 @@ export const {
   useCreateMatrixMutation,
   useUpdateMatrixMutation,
   useGetMatrixQuery,
+  useDeleteMatrixMutation,
   useGetMatricesQuery,
 } = matrixApiSlice;

@@ -5,6 +5,7 @@ import {
   getMatrix,
   updateMatrix,
   getMatrices,
+  deleteMatrix,
 } from '../controllers/matrixController.js';
 import { protect, validateRole } from '../middleware/authMiddleware.js';
 
@@ -16,7 +17,8 @@ router
 router
   .route('/:id')
   .get(protect, getMatrix)
-  .put(protect, validateRole, updateMatrix);
+  .put(protect, validateRole, updateMatrix)
+  .delete(protect, validateRole, deleteMatrix);
 
 // router
 //   .route('/:id/levels')

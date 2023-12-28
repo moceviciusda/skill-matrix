@@ -1,8 +1,7 @@
 import React from 'react';
-import Hero from '../components/Hero';
 import { useGetUserProfileQuery } from '../slices/usersApiSlice';
 import UserCard from '../components/myTeam/UserCard';
-import { Flex, HStack, Heading, VStack } from '@chakra-ui/react';
+import { Flex, HStack, Heading } from '@chakra-ui/react';
 
 const MyTeamScreen = () => {
   const { data, isLoading } = useGetUserProfileQuery();
