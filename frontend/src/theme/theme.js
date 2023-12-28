@@ -1,6 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 import { ProgressTheme } from './Progress';
 import { SwitchTheme } from './Switch';
+import { TableTheme } from './Table';
 
 const styles = {
   global: {
@@ -12,7 +13,11 @@ const styles = {
 
 const config = { initialColorMode: 'dark' };
 
-const components = { ...ProgressTheme.components, ...SwitchTheme.components };
+const components = {
+  ...ProgressTheme.components,
+  ...SwitchTheme.components,
+  ...TableTheme.components,
+};
 
 const theme = extendTheme({ config, styles, components });
 
