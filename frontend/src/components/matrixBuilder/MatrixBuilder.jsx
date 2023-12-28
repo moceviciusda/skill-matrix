@@ -61,15 +61,26 @@ const MatrixBuilder = ({ matrixId }) => {
               gap={1}
             >
               {data.categories.map((category) => (
-                <Button
-                  as={Tab}
+                <Tab
                   key={category.name}
-                  variant='ghost'
-                  p={6}
-                  whiteSpace='normal'
+                  borderRadius={8}
+                  _selected={{
+                    bg: 'purple.100',
+                    boxShadow:
+                      '0px 4px 2px 1px var(--chakra-colors-purple-400)',
+                  }}
+                  _hover={{
+                    bg: 'purple.100',
+                    boxShadow:
+                      '0px 4px 2px 1px var(--chakra-colors-purple-400)',
+                  }}
+                  _active={{
+                    boxShadow:
+                      '0px 0px 4px -12px var(--chakra-colors-purple-400)',
+                  }}
                 >
                   {category.name}
-                </Button>
+                </Tab>
               ))}
               <AddCategoryForm addCategoryHandler={addCategoryHandler} />
             </TabList>

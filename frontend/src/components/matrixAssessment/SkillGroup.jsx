@@ -15,7 +15,13 @@ const SkillGroup = ({ competenceId, skills }) => {
 
   return (
     <Box flex={1}>
+      <VStack flex={1} gap='1px'>
+        {skills.map((skill) => (
+          <Skill key={skill.skillId} skill={skill} />
+        ))}
+      </VStack>
       <Progress
+        mt={4}
         size='lg'
         variant='multiSegment'
         min={0}
@@ -31,12 +37,6 @@ const SkillGroup = ({ competenceId, skills }) => {
         <Text>{+(fullCheckProgress * 100).toFixed(1)} %</Text>
         <Text>{+(singleCheckProgress * 100).toFixed(1)} %</Text>
       </HStack>
-
-      <VStack flex={1} gap='1px'>
-        {skills.map((skill) => (
-          <Skill key={skill.skillId} skill={skill} />
-        ))}
-      </VStack>
     </Box>
   );
 };

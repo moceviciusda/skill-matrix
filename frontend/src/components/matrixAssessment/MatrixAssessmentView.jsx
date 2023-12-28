@@ -1,8 +1,7 @@
-import { Tabs, TabList, TabPanels, TabPanel, Progress } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, TabPanel } from '@chakra-ui/react';
 import CompetenceCategory from './CompetenceCategory';
 import { useGetMatrixQuery } from '../../slices/matrixApiSlice';
 import MatrixTab from './MatrixTab';
-import useTotalProgress from '../../hooks/useTotalProgress';
 import TotalProgressBar from './TotalProgressBar';
 
 const MatrixAssessmentView = ({ matrixId, assignmentData }) => {

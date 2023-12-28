@@ -2,15 +2,12 @@ import React from 'react';
 import useAssignmentDetails from '../../hooks/useAssignmentDetails';
 import {
   Avatar,
-  HStack,
   Heading,
   Spacer,
   Text,
   Flex,
   Box,
-  Progress,
   Wrap,
-  VStack,
 } from '@chakra-ui/react';
 
 const AssignmentHeader = ({ assignment }) => {
@@ -24,7 +21,7 @@ const AssignmentHeader = ({ assignment }) => {
     <Wrap spacing={12}>
       <Heading>{matrix?.name}</Heading>
 
-      {/* <Spacer /> */}
+      <Spacer />
 
       <Flex gap='2' alignItems='center' flexWrap='wrap' justify='flex-end'>
         <Heading size='md'>Assigned By:</Heading>

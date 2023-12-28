@@ -20,13 +20,13 @@ import useCompetenceProgress from '../../hooks/useCompetenceProgress';
 const Competence = ({ competence }) => {
   const { isOpen, onToggle } = useDisclosure();
 
-  const { id: assignmentId } = useParams();
-  const { data: assignmentData } = useGetAssignmentQuery(assignmentId);
+  // const { id: assignmentId } = useParams();
+  // const { data: assignmentData } = useGetAssignmentQuery(assignmentId);
 
-  const { singleCheckProgress, fullCheckProgress } = useCompetenceProgress(
-    competence.competenceId,
-    assignmentData
-  );
+  // const { singleCheckProgress, fullCheckProgress } = useCompetenceProgress(
+  //   competence.competenceId,
+  //   assignmentData
+  // );
 
   const { data, isLoading } = useGetCompetenceQuery(competence.competenceId);
 
