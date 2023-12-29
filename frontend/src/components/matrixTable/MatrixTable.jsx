@@ -16,17 +16,23 @@ import MatrixTableRow from './MatrixTableRow';
 const MatrixTable = ({ matrixList }) => {
   return (
     <TableContainer w={{ base: '100%', xl: '1280px' }} justifySelf='center'>
-      <Table size='sm'>
+      <Table
+        size='sm'
+        cellPadding='4px'
+        whiteSpace='normal'
+        variant='colorHeader'
+        colorScheme='purple'
+      >
         <TableCaption placement='top'>
           <Heading size='lg'>My Matrices</Heading>
         </TableCaption>
         <Thead>
           <Tr>
             <Th>Name</Th>
-            <Th>Assignees</Th>
-            <Th>Team Average</Th>
-            <Th>Stats</Th>
-            <Th>Actions</Th>
+            <Th textAlign='center'>Assignees</Th>
+            <Th textAlign='center'>Team Average</Th>
+            <Th textAlign='center'>Stats</Th>
+            <Th isNumeric>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>

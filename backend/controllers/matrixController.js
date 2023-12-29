@@ -12,7 +12,7 @@ const createMatrix = asyncHandler(async (req, res) => {
 
   if (matrixExists) {
     res.status(400);
-    throw new Error('Matrix already exists');
+    throw new Error(`Matrix ${matrixExists.name} already exists`);
   }
 
   const matrix = await Matrix.create({

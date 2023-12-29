@@ -11,22 +11,22 @@ export const TableTheme = {
     Table: {
       variants: {
         colorHeader: (props) => {
-          const { colorscheme } = props;
+          const { colorScheme } = props;
           return {
             th: {
-              color: mode(`${colorscheme}.600`, `${colorscheme}.400`)(props),
+              color: mode(`${colorScheme}.600`, `${colorScheme}.400`)(props),
               borderBottom: '1px',
               borderColor: mode(
-                `${colorscheme}.100`,
-                `${colorscheme}.700`
+                `${colorScheme}.100`,
+                `${colorScheme}.700`
               )(props),
               ...numericStyles,
             },
             td: {
               borderBottom: '1px',
               borderColor: mode(
-                `${colorscheme}.100`,
-                `${colorscheme}.700`
+                `${colorScheme}.100`,
+                `${colorScheme}.700`
               )(props),
               ...numericStyles,
             },

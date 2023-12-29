@@ -60,9 +60,9 @@ const MatrixBuilder = ({ matrixId }) => {
               minW='200px'
               gap={1}
             >
-              {data.categories.map((category) => (
+              {data.categories.map((category, i) => (
                 <Tab
-                  key={category.name}
+                  key={category.name + i}
                   borderRadius={8}
                   _selected={{
                     bg: 'purple.100',

@@ -8,14 +8,12 @@ const NewMatrixButton = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const clickHandler = async () => {
-    console.log('created matrix');
-
     try {
       const matrix = await createMatrix({
-        name: 'placeholder name2',
+        name: 'New Matrix',
         ownerId: userInfo._id,
       }).unwrap();
-      toast.success(`Matrix created`);
+      toast.success(`${matrix.name} created`);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }

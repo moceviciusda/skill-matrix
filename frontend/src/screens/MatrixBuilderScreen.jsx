@@ -10,10 +10,10 @@ const MatrixBuilderScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  const { data, isFetching } = useGetMatricesQuery({ ownerId: userInfo._id });
+  const { data, isLoading } = useGetMatricesQuery({ ownerId: userInfo._id });
 
   if (id) return <MatrixBuilder matrixId={id} />;
-  else if (isFetching) return <>Loading...</>;
+  else if (isLoading) return <>Loading...</>;
   else
     return (
       <Flex justify='center'>
