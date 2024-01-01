@@ -94,8 +94,6 @@ const deleteMatrix = asyncHandler(async (req, res) => {
   const matrix = await Matrix.findById(req.params.id);
 
   if (matrix) {
-    console.log(req.user._id);
-    console.log(matrix.ownerId);
     if (req.user._id.equals(matrix.ownerId)) {
       Matrix.deleteOne({ _id: matrix._id }).then(() => {
         res.status(204).json({ message: 'Matrix deleted successfully' });
