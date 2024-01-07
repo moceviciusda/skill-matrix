@@ -8,16 +8,15 @@ import {
   CardBody,
   TabList,
   Tabs,
-  Tab,
   TabPanels,
   TabPanel,
-  Button,
   Flex,
   Heading,
 } from '@chakra-ui/react';
 import AddCategoryForm from './AddCategoryForm';
 import { toast } from 'react-toastify';
 import BuilderCompetenceCategory from './BuilderCompetenceCategory';
+import MatrixBuilderTab from './MatrixBuilderTab';
 
 const MatrixBuilder = ({ matrixId }) => {
   const { data, isLoading } = useGetMatrixQuery(matrixId);
@@ -61,26 +60,11 @@ const MatrixBuilder = ({ matrixId }) => {
               gap={1}
             >
               {data.categories.map((category, i) => (
-                <Tab
+                <MatrixBuilderTab
                   key={category.name + i}
-                  borderRadius={8}
-                  _selected={{
-                    bg: 'purple.100',
-                    boxShadow:
-                      '0px 4px 2px 1px var(--chakra-colors-purple-400)',
-                  }}
-                  _hover={{
-                    bg: 'purple.100',
-                    boxShadow:
-                      '0px 4px 2px 1px var(--chakra-colors-purple-400)',
-                  }}
-                  _active={{
-                    boxShadow:
-                      '0px 0px 4px -12px var(--chakra-colors-purple-400)',
-                  }}
-                >
-                  {category.name}
-                </Tab>
+                  category={category}
+                  matrix={data}
+                />
               ))}
               <AddCategoryForm addCategoryHandler={addCategoryHandler} />
             </TabList>
