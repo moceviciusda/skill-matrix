@@ -6,7 +6,7 @@ import { IoClose } from 'react-icons/io5';
 import { useUpdateMatrixMutation } from '../../slices/matrixApiSlice';
 import { toast } from 'react-toastify';
 
-const MatrixBuilderTab = ({ category, matrix }) => {
+const MatrixBuilderTab = ({ index, onClick, category, matrix }) => {
   const [editing, setEditing] = useState(false);
   const [updateMatrix] = useUpdateMatrixMutation();
 
@@ -24,10 +24,13 @@ const MatrixBuilderTab = ({ category, matrix }) => {
   };
 
   const updateNameHandler = (e) => {
-    e.target.value !== category.name &&
-      updateCategory({ ...category, name: e.target.value });
+    console.log(e);
+    if (e.relatedTarget.id !== 'input' + index) {
+      e.target.value !== category.name &&
+        updateCategory({ ...category, name: e.target.value });
 
-    setEditing(false);
+      setEditing(false);
+    }
   };
 
   const submitWeightHandler = (e, category) => {
@@ -51,6 +54,10 @@ const MatrixBuilderTab = ({ category, matrix }) => {
 
   return (
     <Tab
+      as='div'
+      cursor='pointer'
+      onMouseDown={(e) => e.preventDefault()}
+      onClick={() => onClick(index)}
       borderRadius={8}
       _selected={{
         bg: 'purple.100',
@@ -67,14 +74,16 @@ const MatrixBuilderTab = ({ category, matrix }) => {
       <HStack gap='2px'>
         {editing ? (
           <Input
+            id={'input' + index}
             border={0}
             _focusVisible={{ boxShadow: 'none', outline: 'none' }}
             defaultValue={category.name}
+            onMouseDown={(e) => e.preventDefault()}
             autoFocus
-            onFocus={(e) => e.target.select()}
             onClick={(e) => e.stopPropagation()}
+            onFocus={(e) => e.target.select()}
             onBlur={(e) => updateNameHandler(e)}
-            onKeyUp={(e) => e.key === 'Enter' && updateName(e)}
+            onKeyUp={(e) => e.key === 'Enter' && updateNameHandler(e)}
           />
         ) : (
           <>

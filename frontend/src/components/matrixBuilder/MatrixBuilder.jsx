@@ -17,11 +17,18 @@ import AddCategoryForm from './AddCategoryForm';
 import { toast } from 'react-toastify';
 import BuilderCompetenceCategory from './BuilderCompetenceCategory';
 import MatrixBuilderTab from './MatrixBuilderTab';
+import { useState } from 'react';
 
 const MatrixBuilder = ({ matrixId }) => {
   const { data, isLoading } = useGetMatrixQuery(matrixId);
-
   const [updateMatrix] = useUpdateMatrixMutation();
+
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const handleTabsChange = (index) => {
+    console.log('switching TAB');
+    setTabIndex(index);
+  };
 
   const addCategoryHandler = async (name) => {
     try {
@@ -46,6 +53,7 @@ const MatrixBuilder = ({ matrixId }) => {
 
         <CardBody p={0}>
           <Tabs
+            index={tabIndex}
             orientation='vertical'
             variant='soft-rounded'
             colorScheme='purple'
@@ -61,6 +69,8 @@ const MatrixBuilder = ({ matrixId }) => {
             >
               {data.categories.map((category, i) => (
                 <MatrixBuilderTab
+                  index={i}
+                  onClick={handleTabsChange}
                   key={category.name + i}
                   category={category}
                   matrix={data}
