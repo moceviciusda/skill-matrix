@@ -47,6 +47,7 @@ export const {
   useCreateAssignmentMutation,
   useUpdateAssignmentMutation,
   useGetAssignmentQuery,
+  useLazyGetAssignmentQuery,
   useDeleteAssignmentMutation,
   useGetAssignmentsQuery,
 } = assignmentsApiSlice;

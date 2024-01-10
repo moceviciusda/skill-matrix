@@ -15,6 +15,7 @@ import { useParams } from 'react-router-dom';
 import UserSwitch from './UserSwitch';
 import {
   useGetAssignmentQuery,
+  useLazyGetAssignmentQuery,
   useUpdateAssignmentMutation,
 } from '../../slices/assignmentsAPISlice';
 import useAssignmentDetails from '../../hooks/useAssignmentDetails';
@@ -24,8 +25,11 @@ import { toast } from 'react-toastify';
 const Skill = ({ skill }) => {
   const { id: assignmentId } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
-
-  const { data: assignmentData } = useGetAssignmentQuery(assignmentId);
+  console.log('rendering');
+  const { data: assignmentData } = useGetAssignmentQuery(assignmentId, {
+    pollingInterval: 20000,
+  });
+  const [getAssignment] = useLazyGetAssignmentQuery();
 
   const [updateAssignment] = useUpdateAssignmentMutation();
   const assignmentSkill = assignmentData.skills.find(
@@ -44,6 +48,16 @@ const Skill = ({ skill }) => {
   );
 
   const switchChangeHandler = async (e) => {
+    const newData = await getAssignment(assignmentId).unwrap();
+    console.log(newData);
+
+    const newSkill = newData.skills.find((s) => s.id === skill.skillId) || {
+      id: skill.skillId,
+      comments: [],
+      assigneeChecked: false,
+      assingerChecked: false,
+    };
+
     const propertyName =
       assignmentData.assignee === userInfo._id
         ? 'assigneeChecked'
@@ -53,9 +67,9 @@ const Skill = ({ skill }) => {
       await updateAssignment([
         {
           skills: [
-            ...assignmentData.skills.filter((s) => s.id !== assignmentSkill.id),
+            ...newData.skills.filter((s) => s.id !== assignmentSkill.id),
             {
-              ...assignmentSkill,
+              ...newSkill,
               [propertyName]: !assignmentSkill[propertyName],
             },
           ],
