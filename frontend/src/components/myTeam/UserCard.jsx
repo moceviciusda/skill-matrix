@@ -2,6 +2,7 @@ import {
   Avatar,
   Card,
   CardHeader,
+  CardBody,
   Divider,
   VStack,
   Text,
@@ -13,7 +14,6 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { useGetUserQuery } from '../../slices/usersApiSlice';
-import { CardBody } from 'react-bootstrap';
 import MatrixComplianceList from './MatrixComplianceList';
 
 const UserCard = ({ userId }) => {
@@ -41,7 +41,7 @@ const UserCard = ({ userId }) => {
         </Flex>
       </CardHeader>
 
-      <CardBody>
+      <CardBody p={0}>
         <MatrixComplianceList userSkills={data.skills} />
       </CardBody>
 

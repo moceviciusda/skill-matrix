@@ -6,7 +6,7 @@ import { Divider, Grid, GridItem } from '@chakra-ui/react';
 
 const App = () => {
   return (
-    <Grid templateAreas={"'nav' 'main'"}>
+    <Grid templateAreas={"'nav' 'main'"} minH={'100vh'} alignContent={'start'}>
       <GridItem area='nav'>
         <NavBar m={0} p={4} pl={12} pr={6} />
         <Divider />

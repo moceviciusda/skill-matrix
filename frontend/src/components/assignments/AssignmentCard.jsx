@@ -14,9 +14,9 @@ import NavItem from '../navBar/NavItem';
 const AssignmentCard = ({ assignment }) => {
   const { matrix, assignedBy, isLoading } = useAssignmentDetails(assignment);
 
-  if (isLoading) return <>loading</>;
+  if (isLoading) return <Text>loading</Text>;
 
-  if (!matrix) return <>no matrix</>;
+  if (!matrix) return <Text>no matrix</Text>;
 
   return (
     <Card size='sm'>

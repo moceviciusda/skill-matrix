@@ -25,12 +25,12 @@ const MatrixBuilderTab = ({ index, onClick, category, matrix }) => {
 
   const updateNameHandler = (e) => {
     console.log(e);
-    if (e.relatedTarget.id !== 'input' + index) {
-      e.target.value !== category.name &&
-        updateCategory({ ...category, name: e.target.value });
+    // if (e.relatedTarget.id !== 'input' + index) {
+    e.target.value !== category.name &&
+      updateCategory({ ...category, name: e.target.value });
 
-      setEditing(false);
-    }
+    setEditing(false);
+    // }
   };
 
   const submitWeightHandler = (e, category) => {
