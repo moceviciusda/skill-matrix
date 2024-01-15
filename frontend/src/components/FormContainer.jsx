@@ -1,13 +1,13 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Flex, Box } from '@chakra-ui/react';
 
 const FormContainer = ({ children }) => {
   return (
     <Container>
-      <Row className='justify-content-md-center mt-5'>
-        <Col xs={12} md={6} className='card p-5'>
+      <Flex justifyContent='center' mt='5'>
+        <Box w='100%' maxW='md' p='5' borderWidth='1px' borderRadius='lg'>
           {children}
-        </Col>
-      </Row>
+        </Box>
+      </Flex>
     </Container>
   );
 };

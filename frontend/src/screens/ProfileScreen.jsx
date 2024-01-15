@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Heading,
+  VStack,
+  HStack,
+} from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
-import FormContainer from '../components/FormContainer';
+import { useUpdateUserMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
-import { useUpdateUserMutation } from '../slices/usersApiSlice';
+import FormContainer from '../components/FormContainer';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('');
@@ -21,7 +29,7 @@ const ProfileScreen = () => {
   useEffect(() => {
     setName(userInfo.name);
     setEmail(userInfo.email);
-  }, [userInfo.setName, userInfo.setEmail]);
+  }, [userInfo.name, userInfo.email]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -45,58 +53,60 @@ const ProfileScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Update Profile</h1>
+      <VStack align='start'>
+        <Heading mb='4'>Update Profile</Heading>
 
-      <Form onSubmit={submitHandler}>
-        <Form.Group className='my-2' controlId='name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
+        <FormControl id='name' mb='4'>
+          <FormLabel>Name</FormLabel>
+          <Input
             type='text'
             placeholder='Enter Name'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-        </Form.Group>
+        </FormControl>
 
-        <Form.Group className='my-2' controlId='email'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
+        <FormControl id='email' mb='4'>
+          <FormLabel>Email Address</FormLabel>
+          <Input
             type='email'
             placeholder='Enter Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </Form.Group>
+        </FormControl>
 
-        <Form.Group className='my-2' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        <FormControl id='password' mb='4'>
+          <FormLabel>Password</FormLabel>
+          <Input
             type='password'
             placeholder='Enter Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </Form.Group>
+        </FormControl>
 
-        <Form.Group className='my-2' controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
+        <FormControl id='confirmPassword' mb='4'>
+          <FormLabel>Confirm Password</FormLabel>
+          <Input
             type='password'
             placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-        </Form.Group>
+        </FormControl>
 
-        <Row className='py-3'>
-          <Col>
-            <Button type='submit' variant='primary' className='mt-3'>
-              Update
-            </Button>
-          </Col>
-          <Col>{isLoading && 'Loading...'}</Col>
-        </Row>
-      </Form>
+        <HStack spacing='4'>
+          <Button
+            type='submit'
+            colorScheme='purple'
+            onClick={submitHandler}
+            isLoading={isLoading}
+          >
+            Update
+          </Button>
+        </HStack>
+      </VStack>
     </FormContainer>
   );
 };

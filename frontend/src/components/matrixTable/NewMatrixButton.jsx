@@ -20,17 +20,15 @@ const NewMatrixButton = () => {
   };
 
   return (
-    <>
-      <Button
-        variant='outline'
-        colorScheme='purple'
-        w='100%'
-        isLoading={isLoading}
-        onClick={clickHandler}
-      >
-        New Matrix
-      </Button>
-    </>
+    <Button
+      variant='outline'
+      colorScheme='purple'
+      w='100%'
+      isLoading={isLoading}
+      onClick={clickHandler}
+    >
+      New Matrix
+    </Button>
   );
 };
 

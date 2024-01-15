@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import {
+  FormLabel,
+  Input,
+  Button,
+  VStack,
+  Box,
+  Heading,
+  Text,
+  Spinner,
+} from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import { useRegisterMutation } from '../slices/usersApiSlice';
@@ -43,64 +52,65 @@ const RegisterScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <VStack align='start'>
+        <Heading mb='4'>Sign Up</Heading>
 
-      <Form onSubmit={submitHandler}>
-        <Form.Group className='my-2' controlId='name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Enter Name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </Form.Group>
+        <form onSubmit={submitHandler} style={{ width: '100%' }}>
+          <Box mb='4'>
+            <FormLabel>Name</FormLabel>
+            <Input
+              type='text'
+              placeholder='Enter Name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Box>
 
-        <Form.Group className='my-2' controlId='email'>
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder='Enter Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
+          <Box mb='4'>
+            <FormLabel>Email Address</FormLabel>
+            <Input
+              type='email'
+              placeholder='Enter Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Box>
 
-        <Form.Group className='my-2' controlId='password'>
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Enter Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
+          <Box mb='4'>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type='password'
+              placeholder='Enter Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Box>
 
-        <Form.Group className='my-2' controlId='confirmPassword'>
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Confirm Password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </Form.Group>
+          <Box mb='4'>
+            <FormLabel>Confirm Password</FormLabel>
+            <Input
+              type='password'
+              placeholder='Confirm Password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </Box>
 
-        <Row className='py-3'>
-          <Col>
-            <Button type='submit' variant='primary' className='mt-3'>
-              Sign Up
-            </Button>
-          </Col>
-          <Col>{isLoading && 'loading'}</Col>
-        </Row>
+          <Button
+            type='submit'
+            colorScheme='purple'
+            mb='4'
+            disabled={isLoading}
+            isLoading={isLoading}
+          >
+            <Text>Sign Up</Text>
+          </Button>
+        </form>
 
-        <Row className='py-3'>
-          <Col>
-            Already have an account? <Link to='/login'>Login</Link>
-          </Col>
-        </Row>
-      </Form>
+        <Text>
+          Already have an account? <Link to='/login'>Login</Link>
+        </Text>
+      </VStack>
     </FormContainer>
   );
 };
