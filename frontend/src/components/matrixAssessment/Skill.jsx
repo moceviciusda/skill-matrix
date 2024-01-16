@@ -25,14 +25,14 @@ import { toast } from 'react-toastify';
 const Skill = ({ skill }) => {
   const { id: assignmentId } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
-  console.log('rendering');
+
   const { data: assignmentData } = useGetAssignmentQuery(assignmentId, {
     pollingInterval: 20000,
   });
-  const [getAssignment] = useLazyGetAssignmentQuery();
+  const [getAssignment, { isLoading }] = useLazyGetAssignmentQuery();
 
   const [updateAssignment] = useUpdateAssignmentMutation();
-  const assignmentSkill = assignmentData.skills.find(
+  let assignmentSkill = assignmentData.skills.find(
     (s) => s.id === skill.skillId
   ) || {
     id: skill.skillId,
@@ -51,7 +51,7 @@ const Skill = ({ skill }) => {
     const newData = await getAssignment(assignmentId).unwrap();
     console.log(newData);
 
-    const newSkill = newData.skills.find((s) => s.id === skill.skillId) || {
+    assignmentSkill = newData.skills.find((s) => s.id === skill.skillId) || {
       id: skill.skillId,
       comments: [],
       assigneeChecked: false,
@@ -69,7 +69,7 @@ const Skill = ({ skill }) => {
           skills: [
             ...newData.skills.filter((s) => s.id !== assignmentSkill.id),
             {
-              ...newSkill,
+              ...assignmentSkill,
               [propertyName]: !assignmentSkill[propertyName],
             },
           ],
@@ -93,7 +93,7 @@ const Skill = ({ skill }) => {
     colors = mismatchColors;
   }
 
-  if (skillLoading) return <></>;
+  if (skillLoading || isLoading) return <></>;
 
   return (
     <Card
@@ -110,6 +110,7 @@ const Skill = ({ skill }) => {
       <CardBody p={1}>
         <HStack justify='flex-end' gap='2px'>
           <UserSwitch
+            key={`assigner${assignmentSkill?.assignerChecked}`}
             id={assignmentData.assignedBy + skill.skillId}
             user={assignedBy}
             isDisabled={userInfo._id !== assignmentData.assignedBy}
@@ -117,6 +118,7 @@ const Skill = ({ skill }) => {
             onChange={(e) => switchChangeHandler(e)}
           />
           <UserSwitch
+            key={`assignee${assignmentSkill?.assigneeChecked}`}
             id={assignmentData.assignee + skill.skillId}
             user={assignee}
             isDisabled={userInfo._id !== assignmentData.assignee}
