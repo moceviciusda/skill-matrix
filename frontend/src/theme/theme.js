@@ -11,7 +11,7 @@ const styles = {
   },
 };
 
-const config = { initialColorMode: 'dark' };
+const config = { initialColorMode: 'light' };
 
 const components = {
   ...ProgressTheme.components,

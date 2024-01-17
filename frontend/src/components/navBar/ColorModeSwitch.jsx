@@ -1,9 +1,7 @@
 import { Button, Switch, Text, useColorMode } from '@chakra-ui/react';
-import { useState } from 'react';
 
 const ColorModeSwitch = ({ variant = 'ghost' }) => {
   const { toggleColorMode, colorMode } = useColorMode();
-  const [isChecked, setIsChecked] = useState(colorMode === 'dark');
 
   return (
     <Button

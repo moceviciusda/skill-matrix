@@ -9,6 +9,7 @@ export const assignmentsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Assignments'],
     }),
     updateAssignment: builder.mutation({
       query: ([data, id]) => ({

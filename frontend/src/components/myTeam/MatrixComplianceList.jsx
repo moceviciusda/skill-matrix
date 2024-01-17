@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { VStack } from '@chakra-ui/react';
 import MatrixComplianceListItem from './MatrixComplianceListItem';
 
-const MatrixComplianceList = ({ userSkills }) => {
+const MatrixComplianceList = ({ user }) => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const { data, isLoading } = useGetMatricesQuery({ ownerId: userInfo._id });
@@ -19,7 +19,7 @@ const MatrixComplianceList = ({ userSkills }) => {
         <MatrixComplianceListItem
           key={matrix._id}
           matrix={matrix}
-          userSkills={userSkills.filter((skill) => skill.approvedBy)}
+          user={user}
         />
       ))}
     </VStack>

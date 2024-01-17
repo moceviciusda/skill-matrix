@@ -27,7 +27,7 @@ const Skill = ({ skill }) => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const { data: assignmentData } = useGetAssignmentQuery(assignmentId, {
-    pollingInterval: 20000,
+    pollingInterval: 5000,
   });
   const [getAssignment, { isLoading }] = useLazyGetAssignmentQuery();
 

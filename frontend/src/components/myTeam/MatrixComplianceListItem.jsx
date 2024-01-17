@@ -10,8 +10,24 @@ import {
   Progress,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useCreateAssignmentMutation } from '../../slices/assignmentsAPISlice';
+import { toast } from 'react-toastify';
 
-const MatrixComplianceListItem = ({ userSkills, matrix }) => {
+const MatrixComplianceListItem = ({ user, matrix }) => {
+  const [createAssignment, { isLoading }] = useCreateAssignmentMutation();
+
+  const assignMatrixHandler = async () => {
+    try {
+      await createAssignment({
+        matrixId: matrix._id,
+        assignee: user._id,
+      }).unwrap();
+      toast.success(`"${matrix.name}" assigned to ${user.name}`);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
   return (
     <Card flexDir='row' flexWrap='wrap' size='sm'>
       <CardHeader display='flex' alignItems='center' maxW='300px'>
@@ -30,7 +46,9 @@ const MatrixComplianceListItem = ({ userSkills, matrix }) => {
       </CardBody>
       <CardFooter>
         <ButtonGroup variant='ghost' colorScheme='purple' size='sm'>
-          <Button>Assign</Button>
+          <Button onClick={assignMatrixHandler} isLoading={isLoading}>
+            Assign
+          </Button>
         </ButtonGroup>
       </CardFooter>
     </Card>

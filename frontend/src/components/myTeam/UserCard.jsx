@@ -42,7 +42,7 @@ const UserCard = ({ userId }) => {
       </CardHeader>
 
       <CardBody p={0}>
-        <MatrixComplianceList userSkills={data.skills} />
+        <MatrixComplianceList user={data} />
       </CardBody>
 
       {/* <CardFooter></CardFooter> */}
