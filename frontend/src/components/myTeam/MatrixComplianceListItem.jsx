@@ -1,13 +1,11 @@
 import {
   Button,
   ButtonGroup,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Center,
   Heading,
   Progress,
+  Td,
+  Tr,
+  useColorMode,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useCreateAssignmentMutation } from '../../slices/assignmentsAPISlice';
@@ -15,6 +13,8 @@ import { toast } from 'react-toastify';
 
 const MatrixComplianceListItem = ({ user, matrix }) => {
   const [createAssignment, { isLoading }] = useCreateAssignmentMutation();
+
+  const { colorMode } = useColorMode();
 
   const assignMatrixHandler = async () => {
     try {
@@ -29,11 +29,19 @@ const MatrixComplianceListItem = ({ user, matrix }) => {
   };
 
   return (
-    <Card flexDir='row' flexWrap='wrap' size='sm'>
-      <CardHeader display='flex' alignItems='center' maxW='300px'>
+    <Tr
+      paddingX={0}
+      _hover={{
+        bg:
+          colorMode === 'dark'
+            ? 'var(--chakra-colors-purple-800)'
+            : 'var(--chakra-colors-purple-50)',
+      }}
+    >
+      <Td>
         <Heading size='sm'>{matrix.name}</Heading>
-      </CardHeader>
-      <CardBody display='flex' alignItems='center'>
+      </Td>
+      <Td>
         <Progress
           flex='1'
           hasStripe
@@ -43,15 +51,15 @@ const MatrixComplianceListItem = ({ user, matrix }) => {
           minW='200px'
           borderRadius='28px'
         />
-      </CardBody>
-      <CardFooter>
+      </Td>
+      <Td>
         <ButtonGroup variant='ghost' colorScheme='purple' size='sm'>
           <Button onClick={assignMatrixHandler} isLoading={isLoading}>
             Assign
           </Button>
         </ButtonGroup>
-      </CardFooter>
-    </Card>
+      </Td>
+    </Tr>
   );
 };
 

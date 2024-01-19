@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetMatricesQuery } from '../../slices/matrixApiSlice';
 import { useSelector } from 'react-redux';
-import { VStack } from '@chakra-ui/react';
+import { Table, Tbody } from '@chakra-ui/react';
 import MatrixComplianceListItem from './MatrixComplianceListItem';
 
 const MatrixComplianceList = ({ user }) => {
@@ -14,15 +14,17 @@ const MatrixComplianceList = ({ user }) => {
   if (!data) return <>No matrices to assess. Create new matrix</>;
 
   return (
-    <VStack gap='0' alignItems='stretch'>
-      {data.map((matrix) => (
-        <MatrixComplianceListItem
-          key={matrix._id}
-          matrix={matrix}
-          user={user}
-        />
-      ))}
-    </VStack>
+    <Table colorScheme='purple' size='sm'>
+      <Tbody>
+        {data.map((matrix) => (
+          <MatrixComplianceListItem
+            key={matrix._id}
+            matrix={matrix}
+            user={user}
+          />
+        ))}
+      </Tbody>
+    </Table>
   );
 };
 
