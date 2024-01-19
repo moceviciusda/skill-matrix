@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGetMatricesQuery } from '../../slices/matrixApiSlice';
 import { useSelector } from 'react-redux';
-import { Table, Tbody } from '@chakra-ui/react';
+import { Table, Tbody, Td, Thead, Tr } from '@chakra-ui/react';
 import MatrixComplianceListItem from './MatrixComplianceListItem';
 
 const MatrixComplianceList = ({ user }) => {
@@ -15,6 +15,11 @@ const MatrixComplianceList = ({ user }) => {
 
   return (
     <Table colorScheme='purple' size='sm'>
+      <Thead>
+        <Tr>
+          <Td colSpan='100%' p={0} />
+        </Tr>
+      </Thead>
       <Tbody>
         {data.map((matrix) => (
           <MatrixComplianceListItem
