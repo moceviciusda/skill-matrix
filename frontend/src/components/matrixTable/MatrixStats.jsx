@@ -3,6 +3,7 @@ import {
   CircularProgressLabel,
   HStack,
   Text,
+  VStack,
   Wrap,
 } from '@chakra-ui/react';
 import useTotalProgress from '../../hooks/useTotalProgress';
@@ -26,8 +27,11 @@ const MatrixStats = ({ matrix, assignments, isLoading }) => {
 
   return (
     <HStack justify='space-between' mr='-32px'>
-      <Text flex={1}>{`Assigned: ${assignments.length}`}</Text>
-      <Text flex={1}>{`Completed: ${completedAssignments.length}`}</Text>
+      <VStack>
+        <Text flex={1}>{`Assigned: ${assignments.length}`}</Text>
+        <Text flex={1}>{`Completed: ${completedAssignments.length}`}</Text>
+      </VStack>
+
       <Wrap justify='center' align='center' flex={1}>
         <Text>Average:</Text>
         <CircularProgress
