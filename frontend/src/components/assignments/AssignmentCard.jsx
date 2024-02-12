@@ -10,9 +10,13 @@ import {
 } from '@chakra-ui/react';
 import useAssignmentDetails from '../../hooks/useAssignmentDetails';
 import NavItem from '../navBar/NavItem';
+import { useSelector } from 'react-redux';
 
 const AssignmentCard = ({ assignment }) => {
-  const { matrix, assignedBy, isLoading } = useAssignmentDetails(assignment);
+  const { matrix, assignedBy, assignee, isLoading } =
+    useAssignmentDetails(assignment);
+
+  const { userInfo } = useSelector((state) => state.auth);
 
   if (isLoading) return <Text>loading</Text>;
 
@@ -27,8 +31,18 @@ const AssignmentCard = ({ assignment }) => {
       </CardHeader>
 
       <CardBody>
-        <Avatar size='xs' name={assignedBy?.name} />
-        <Text as='span'>{assignedBy?.name || 'unknown'} </Text>
+        {userInfo._id === assignedBy?._id ? (
+          <>
+            <Avatar size='xs' name={assignee?.name} />
+            <Text as='span'>{assignee?.name || 'unknown'} </Text>
+          </>
+        ) : (
+          <>
+            <Avatar size='xs' name={assignedBy?.name} />
+            <Text as='span'>{assignedBy?.name || 'unknown'} </Text>
+          </>
+        )}
+
         <Text textTransform=''>{assignment.createdAt} </Text>
       </CardBody>
 

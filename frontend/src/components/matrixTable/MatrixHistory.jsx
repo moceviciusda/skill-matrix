@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import useTotalProgress from '../../hooks/useTotalProgress';
 
-const MatrixStats = ({ matrix, assignments, isLoading }) => {
+const MatrixHistory = ({ matrix, assignments, isLoading }) => {
   const completedAssignments = assignments.filter(
     (assignment) => assignment.approved
   );
@@ -50,4 +50,4 @@ const MatrixStats = ({ matrix, assignments, isLoading }) => {
   );
 };
 
-export default MatrixStats;
+export default MatrixHistory;

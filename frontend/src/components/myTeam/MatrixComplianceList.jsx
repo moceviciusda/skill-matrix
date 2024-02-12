@@ -1,4 +1,3 @@
-import React from 'react';
 import { useGetMatricesQuery } from '../../slices/matrixApiSlice';
 import { useSelector } from 'react-redux';
 import { Table, Tbody, Td, Thead, Tr } from '@chakra-ui/react';

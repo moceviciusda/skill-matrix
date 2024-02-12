@@ -1,4 +1,3 @@
-import React from 'react';
 import useAssignmentDetails from '../../hooks/useAssignmentDetails';
 import {
   Avatar,

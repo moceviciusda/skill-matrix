@@ -31,7 +31,7 @@ const MatrixTable = ({ matrixList }) => {
             <Th>Name</Th>
             <Th textAlign='center'>Assignees</Th>
             <Th textAlign='center'>Team Average</Th>
-            <Th textAlign='center'>Stats</Th>
+            <Th textAlign='center'>History</Th>
             <Th isNumeric>Actions</Th>
           </Tr>
         </Thead>

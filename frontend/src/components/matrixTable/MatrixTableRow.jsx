@@ -16,7 +16,7 @@ import NavItem from '../navBar/NavItem';
 import { useDeleteMatrixMutation } from '../../slices/matrixApiSlice';
 import { useGetAssignmentsQuery } from '../../slices/assignmentsAPISlice';
 import { toast } from 'react-toastify';
-import MatrixStats from './MatrixStats';
+import MatrixHistory from './MatrixHistory';
 
 const MatrixTableRow = ({ matrix }) => {
   const [deleteMatrix] = useDeleteMatrixMutation();
@@ -63,7 +63,11 @@ const MatrixTableRow = ({ matrix }) => {
         />
       </Td>
       <Td textAlign='center'>
-        <MatrixStats matrix={matrix} assignments={data} isLoading={isLoading} />
+        <MatrixHistory
+          matrix={matrix}
+          assignments={data}
+          isLoading={isLoading}
+        />
       </Td>
 
       <Td>
