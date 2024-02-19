@@ -16,4 +16,5 @@ Skill Matrix is a work-in-progress web application developed using the MERN stac
 
 - **Competence Matrices:** Users with management roles can create matrices defining the skills relevant to their team or project.
 - **Evaluation:** Both workers and managers can evaluate and select the skills they believe the worker possesses.
-- **Matrix Compliance:** The application calculates and displays how well the worker complies with the created matrix. Complience disagreements are highlighted to streamline the discussion process during final evaluation.
+- **Matrix Compliance:** The application calculates and displays how well the worker complies with the created matrix. Compliance disagreements are highlighted to streamline the discussion process during final evaluation.
+- **History:** Evaluation data is stored for easier reevaluation and statistics
