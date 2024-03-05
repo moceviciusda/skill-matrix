@@ -54,6 +54,7 @@ export const competencesApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateCompetenceMutation,
   useGetCompetenceQuery,
+  useLazyGetCompetenceQuery,
   useGetCompetencesQuery,
   useUpdateCompetenceMutation,
   useUpdateCompetenceLevelsMutation,

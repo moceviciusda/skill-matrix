@@ -17,12 +17,15 @@ import { useDeleteMatrixMutation } from '../../slices/matrixApiSlice';
 import { useGetAssignmentsQuery } from '../../slices/assignmentsAPISlice';
 import { toast } from 'react-toastify';
 import MatrixHistory from './MatrixHistory';
+import useCloneMatrix from '../../hooks/matrix/useCloneMatrix';
+import useCloneCompetence from '../../hooks/matrix/useCloneCompetence';
+import clone from 'nodemon/lib/utils/clone';
 
 const MatrixTableRow = ({ matrix }) => {
-  const [deleteMatrix] = useDeleteMatrixMutation();
   const { data, isLoading } = useGetAssignmentsQuery({ matrixId: matrix._id });
-
   const { colorMode } = useColorMode();
+
+  const [deleteMatrix] = useDeleteMatrixMutation();
 
   const deleteMatrixHandler = async () => {
     try {
@@ -32,6 +35,19 @@ const MatrixTableRow = ({ matrix }) => {
       toast.error(err?.data?.message || err.error);
     }
   };
+
+  const [cloneMatrix] = useCloneMatrix(matrix);
+
+  const cloneMatrixHandler = async () => {
+    try {
+      await cloneMatrix();
+      toast.success(`Matrix ${matrix.name} cloned `);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
+  const [cloneCompetence] = useCloneCompetence();
 
   if (isLoading) return <></>;
 
@@ -79,13 +95,25 @@ const MatrixTableRow = ({ matrix }) => {
           </Tooltip>
 
           <Tooltip label='Share' borderRadius='8px'>
-            <Button variant='ghost' colorScheme='purple' borderRadius='full'>
+            <Button
+              variant='ghost'
+              colorScheme='purple'
+              borderRadius='full'
+              onClick={() => {
+                cloneCompetence('658b533a80e7d8e00ca45583');
+              }}
+            >
               <FaShare />
             </Button>
           </Tooltip>
 
           <Tooltip label='Clone' borderRadius='8px'>
-            <Button variant='ghost' colorScheme='purple' borderRadius='full'>
+            <Button
+              variant='ghost'
+              colorScheme='purple'
+              borderRadius='full'
+              onClick={cloneMatrixHandler}
+            >
               <FaClone />
             </Button>
           </Tooltip>
