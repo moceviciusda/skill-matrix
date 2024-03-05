@@ -5,30 +5,18 @@ import Competence from '../models/competenceModel.js';
 // route    POST /api/competences
 // @access  Private && Admin
 const createCompetence = asyncHandler(async (req, res) => {
-  const { name, type, category } = req.body;
-  const levels = req.body.levels || [];
-
-  // const competenceExists = await Competence.findOne({ name });
-
-  // if (competenceExists) {
-  //   res.status(400);
-  //   throw new Error('Competence already exists');
-  // }
+  const { name, skills } = req.body;
 
   const competence = await Competence.create({
     name,
-    type,
-    category,
-    levels,
+    skills: skills || [],
   });
 
   if (competence) {
     res.status(201).json({
       _id: competence._id,
       name: competence.name,
-      type: competence.type,
-      category: competence.category,
-      levels: competence.levels,
+      skills: competence.skills,
     });
   } else {
     res.status(400);

@@ -28,8 +28,6 @@ const useCloneMatrix = (matrix) => {
 
     const resolvedCategories = await Promise.all(newCategories);
 
-    console.log(resolvedCategories);
-
     return await createMatrix({
       ...matrix,
       name: `${matrix.name} (clone)`,

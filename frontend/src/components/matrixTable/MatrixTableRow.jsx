@@ -18,15 +18,12 @@ import { useGetAssignmentsQuery } from '../../slices/assignmentsAPISlice';
 import { toast } from 'react-toastify';
 import MatrixHistory from './MatrixHistory';
 import useCloneMatrix from '../../hooks/matrix/useCloneMatrix';
-import useCloneCompetence from '../../hooks/matrix/useCloneCompetence';
-import clone from 'nodemon/lib/utils/clone';
 
 const MatrixTableRow = ({ matrix }) => {
   const { data, isLoading } = useGetAssignmentsQuery({ matrixId: matrix._id });
   const { colorMode } = useColorMode();
 
   const [deleteMatrix] = useDeleteMatrixMutation();
-
   const deleteMatrixHandler = async () => {
     try {
       await deleteMatrix(matrix._id);
@@ -37,7 +34,6 @@ const MatrixTableRow = ({ matrix }) => {
   };
 
   const [cloneMatrix] = useCloneMatrix(matrix);
-
   const cloneMatrixHandler = async () => {
     try {
       await cloneMatrix();
@@ -46,8 +42,6 @@ const MatrixTableRow = ({ matrix }) => {
       toast.error(err?.data?.message || err.error);
     }
   };
-
-  const [cloneCompetence] = useCloneCompetence();
 
   if (isLoading) return <></>;
 
@@ -95,14 +89,7 @@ const MatrixTableRow = ({ matrix }) => {
           </Tooltip>
 
           <Tooltip label='Share' borderRadius='8px'>
-            <Button
-              variant='ghost'
-              colorScheme='purple'
-              borderRadius='full'
-              onClick={() => {
-                cloneCompetence('658b533a80e7d8e00ca45583');
-              }}
-            >
+            <Button variant='ghost' colorScheme='purple' borderRadius='full'>
               <FaShare />
             </Button>
           </Tooltip>
