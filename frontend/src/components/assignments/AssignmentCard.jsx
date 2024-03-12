@@ -46,9 +46,15 @@ const AssignmentCard = ({ assignment }) => {
         <Text textTransform=''>{assignment.createdAt} </Text>
       </CardBody>
 
-      <CardFooter>
-        <NavItem to={`/assignments/${assignment._id}`}>do</NavItem>
-        <Button>submit</Button>
+      <CardFooter display='flex' gap={2}>
+        <NavItem
+          to={`/assignments/${assignment._id}`}
+          variant='outline'
+          colorScheme='purple'
+        >
+          open
+        </NavItem>
+        <Button colorScheme='purple'>submit</Button>
       </CardFooter>
     </Card>
   );
