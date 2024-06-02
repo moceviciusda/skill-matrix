@@ -1,6 +1,10 @@
 # Skill Matrix
 
-Skill Matrix is a work-in-progress web application developed using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Chakra UI. It empowers managers and team leads to create competence matrices for evaluating the skills and competences of their team members.
+Skill Matrix is a team competence monitoring and individual evaluation project I used as an opportunity to learn React.
+It empowers managers and team leads to create competence matrices for evaluating the skills and competences of their team members.
+
+The project died when I got comfortable with the stack and realized that there were more appropriate technologies for the task that I also want to learn.
+[Bloom](https://bloom-kappa-flame.vercel.app/) is the scaled-up successor of Skill Matrix, through which I'm hoping to bring the idea to completion.
 
 ## Technologies Used
 
